@@ -51,11 +51,15 @@ Usage of error messages in require statements can help at monitoring and debuggi
 - [VaultImplementation.sol#L211](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L211)
 - [WithdrawProxy.sol#L138](https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawProxy.sol#L138)
 - [WithdrawProxy.sol#L231](https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawProxy.sol#L231)
+
+## 4 Add natspec documenation
+Add more documentation to the functions, preferrably natspec documentation. Right now, natspec is only used at a few functions so it's hard to read the code.
 ## Miscellaneous
 ### Casting to uint256 is not necessary
 [AstariaRouter.sol#L531-L540](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L531-L540)
 ### Redundant checking of address(0)
 [AstariaRouter.sol#L364-L390](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L364-L390)
+Potential fix:
 ```diff
 uint256 i;
     for (; i < file.length; ) {
