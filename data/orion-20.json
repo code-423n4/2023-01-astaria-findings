@@ -1,7 +1,7 @@
 {
   "contest": 202,
   "handle": "orion",
-  "risk": "",
+  "risk": "3",
   "title": "Transfer by approval on clearinghouse can be violated ",
   "issueId": 20,
   "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/20"
