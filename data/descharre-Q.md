@@ -54,3 +54,39 @@ Usage of error messages in require statements can help at monitoring and debuggi
 ## Miscellaneous
 ### Casting to uint256 is not necessary
 [AstariaRouter.sol#L531-L540](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L531-L540)
+### Redundant checking of address(0)
+[AstariaRouter.sol#L364-L390](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L364-L390)
+```diff
+uint256 i;
+    for (; i < file.length; ) {
+-     FileType what = file[i].what;
+      bytes memory data = file[i].data;
++     FileType what = file[i].what;  
++     address addr = abi.decode(data, (address));
++     if (addr == address(0)) revert InvalidFileData();
+      if (what == FileType.Implementation) {
+-       (uint8 implType, address addr) = abi.decode(data, (uint8, address));
++       (uint8 implType) = abi.decode(data, (uint8));
+-       if (addr == address(0)) revert InvalidFileData();
+        s.implementations[implType] = addr;
+      } else if (what == FileType.CollateralToken) {
+-       address addr = abi.decode(data, (address));
+-       if (addr == address(0)) revert InvalidFileData();
+        s.COLLATERAL_TOKEN = ICollateralToken(addr);
+      } else if (what == FileType.LienToken) {
+-       address addr = abi.decode(data, (address));
+-       if (addr == address(0)) revert InvalidFileData();
+        s.LIEN_TOKEN = ILienToken(addr);
+      } else if (what == FileType.TransferProxy) {
+-       address addr = abi.decode(data, (address));
+-       if (addr == address(0)) revert InvalidFileData();
+        s.TRANSFER_PROXY = ITransferProxy(addr);
+      } else {
+        revert UnsupportedFile();
+      }
+      emit FileUpdated(what, data);
+      unchecked {
+        ++i;
+      }
+    }
+```
