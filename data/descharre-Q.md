@@ -61,9 +61,9 @@ uint256 i;
     for (; i < file.length; ) {
 -     FileType what = file[i].what;
       bytes memory data = file[i].data;
-+     FileType what = file[i].what;  
 +     address addr = abi.decode(data, (address));
 +     if (addr == address(0)) revert InvalidFileData();
++     FileType what = file[i].what;  
       if (what == FileType.Implementation) {
 -       (uint8 implType, address addr) = abi.decode(data, (uint8, address));
 +       (uint8 implType) = abi.decode(data, (uint8));
