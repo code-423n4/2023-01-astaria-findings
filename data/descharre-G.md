@@ -30,5 +30,5 @@ Gas saved: 100
        );
      }
 ```
-[CollateralToken.sol#L299-L313](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L299-L313)
-Gas saved: 135
+[CollateralToken.sol#L299-L328](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L299-L328)
+Gas saved: 277
