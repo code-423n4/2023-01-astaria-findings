@@ -32,3 +32,96 @@ Gas saved: 100
 ```
 [CollateralToken.sol#L299-L328](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L299-L328)
 Gas saved: 277
+```diff 
++   address clearingHouse = s.clearingHouse[collateralId];	
+-    ClearingHouse(s.clearingHouse[collateralId]).transferUnderlying(
++   ClearingHouse(clearingHouse).transferUnderlying(
+      addr,
+      tokenId,
+      address(receiver)
+    );
+
+    //trigger the flash action on the receiver
+    if (
+      receiver.onFlashAction(
+-       IFlashAction.Underlying(s.clearingHouse[collateralId], addr, tokenId),
++       IFlashAction.Underlying(clearingHouse, addr, tokenId),
+        data
+      ) != keccak256("FlashAction.onFlashAction")
+    ) {
+      revert FlashActionCallbackFailed();
+    }
+
+    if (
+      securityHook != address(0) &&
+      preTransferState != ISecurityHook(securityHook).getState(addr, tokenId)
+    ) {
+      revert FlashActionSecurityCheckFailed();
+    }
+
+    // validate that the NFT returned after the call
+    
+    if (
+-     IERC721(addr).ownerOf(tokenId) != address(s.clearingHouse[collateralId])
++     IERC721(addr).ownerOf(tokenId) != address(clearingHouse)
+    ) {
+      revert FlashActionNFTNotReturned();
+    }
+```
+[CollateralToken.sol#L434-L474](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L434-L474)
+Gas saved: 565
+```diff 
+L434
+    Asset memory underlying = s.idToUnderlying[collateralId];
++   address clearingHouse = s.clearingHouse[collateralId];
+
+L451
+    considerationItems[0] = ConsiderationItem(
+      ItemType.ERC20,
+      settlementToken,
+      uint256(0),
+      prices[0],
+      prices[1],
+-     payable(address(s.clearingHouse[collateralId]))
++     payable(address(clearingHouse))
+    );
+    considerationItems[1] = ConsiderationItem(
+      ItemType.ERC1155,
+-     s.clearingHouse[collateralId],
++     clearingHouse
+      uint256(uint160(settlementToken)),
+      prices[0],
+      prices[1],
+-     payable(s.clearingHouse[collateralId])
++     payable(address(clearingHouse))
+    );
+
+    orderParameters = OrderParameters({
+-     offerer: s.clearingHouse[collateralId],
++     offerer: clearingHouse,
+      ""
+    });
+```
+[WithdrawProxy.sol#L241-266](https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawProxy.sol#L241-266)
+Gas saved: 135
+```diff 
+L241
+    WPStorage storage s = _loadSlot();
++  uint88 expected = s.expected;
+    if (s.finalAuctionEnd == 0) {
+      revert InvalidState(InvalidStates.CANT_CLAIM);
+    }
+L 258
+-    if (balance < s.expected) {
++    if (balance < expected) {
+      PublicVault(VAULT()).decreaseYIntercept(
+-       (s.expected - balance).mulWadDown(1e18 - s.withdrawRatio)
++       (expected - balance).mulWadDown(1e18 - s.withdrawRatio)
+      );
+    } else {
+      PublicVault(VAULT()).increaseYIntercept(
+-       (balance - s.expected).mulWadDown(1e18 - s.withdrawRatio)
++       (balance - expected).mulWadDown(1e18 - s.withdrawRatio)
+      );
+    }
+```
