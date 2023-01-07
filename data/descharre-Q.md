@@ -5,6 +5,7 @@
 | 2      | REQUIRE() OR REVERT() STATEMENTS THAT CHECK INPUT ARGUMENTS SHOULD BE AT THE TOP OF THE FUNCTION| 1 |
 | 3      |Missing error messages in require statements| 1 |
 | 4      |Add natspec documentation| 1 |
+| 5      |Useless functions| 1 |
 | 3      |Miscellaneous| 1 |
 
 # Details
@@ -54,6 +55,9 @@ Usage of error messages in require statements can help at monitoring and debuggi
 
 ## 4 Add natspec documenation
 Add more documentation to the functions, preferrably natspec documentation. Right now, natspec is only used at a few functions so it's hard to read the code.
+##5 useless functions
+- [CollateralToken.sol#L206-208](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L206-208)
+file() function is useless, it's better to make the _file() function public with the modifier requiresAuth().
 ## Miscellaneous
 ### Casting to uint256 is not necessary
 [AstariaRouter.sol#L531-L540](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L531-L540)
