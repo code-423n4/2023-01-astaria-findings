@@ -6,6 +6,7 @@
 | 3      |Missing error messages in require statements| 1 |
 | 4      |Add natspec documentation| 1 |
 | 5      |Useless functions| 1 |
+| 6     |Rename| 1 |
 | 3      |Miscellaneous| 1 |
 
 # Details
@@ -15,12 +16,20 @@
 73:       uint256 private constant COLLATERAL_TOKEN_SLOT =
 74:          uint256(keccak256("xyz.astaria.CollateralToken.storage.location")) - 1;
 ```
+[LienToken.sol#L50](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L50)
+```solidity
+50:       uint256 private constant LIEN_SLOT =
+51:          uint256(keccak256("xyz.astaria.LienToken.storage.location")) - 1;
+
+53:       bytes32 constant ACTIVE_AUCTION = bytes32("ACTIVE_AUCTION");
+```
 ## 2 REQUIRE() OR REVERT() STATEMENTS THAT CHECK INPUT ARGUMENTS SHOULD BE AT THE TOP OF THE FUNCTION
 [CollateralToken.sol#L564](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L564)
 [PublicVault.sol#L170](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L170)
 
 This can also be done for some if statements
 [CollateralToken.sol#L338-L340](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L338-L340)
+[CollateralToken.sol#L536](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L536) : can be put third place
 [CollateralToken.sol#L564](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L564)
 [AstariaRouter.sol#L466](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L466)
 
@@ -104,6 +113,19 @@ function file(File calldata incoming) public requiresAuth {
   }
 ```
 file() function is useless, it's better to make the _file() function public with the modifier requiresAuth().
+## 5 Rename
+### Rename the FileType of the structs to 'fileType' instead of 'what'
+- [IAstariaRouter.sol#L49-L51](https://github.com/code-423n4/2023-01-astaria/blob/main/src/IAstariaRouter.sol#L49-L51)
+- [ICollateralToken.sol#L82-L83](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ICollateralToken.sol#L82-L83)
+- [ILienToken.sol#L30-L31](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ILienToken.sol#L30-L31)
+```solidity
+  struct File {
+    FileType what;
+    bytes data;
+  }
+```
+'What' isn't a professional naming and filetype makes it easier to read.
+
 ## Miscellaneous
 ### Casting to uint256 is not necessary
 [AstariaRouter.sol#L531-L541](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L531-L541)
