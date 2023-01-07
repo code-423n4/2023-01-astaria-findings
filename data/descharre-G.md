@@ -2,7 +2,7 @@
 |ID     | Finding|  Gas saved| Instances |
 |:----: | :---           |              :----:    |  :----:         |
 |1       | Storage variables read more than once in a function must be assigned to a memory variable | 100 | 1 |
-| 2      | | 18| 1 |
+| 2      |Redundant event | 18| 1 |
 | 3      |Miscellaneous| 0| 1 |
 
 ## Details
@@ -125,3 +125,46 @@ L 258
       );
     }
 ```
+## 2 Redundant event
+Combining the event AddLien and LienStackUpdated can be a huge gas saver
+Average gas saved: 1354
+[ILienToken.sol#L294-L311](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ILienToken.sol#L294-L311)
+```diff
+L294
+-  event AddLien(
+-    uint256 indexed collateralId,
+-    uint8 position,
+-    uint256 indexed lienId,
+-    Stack stack
+-  );
+
+L306
+  event LienStackUpdated(
+    uint256 indexed collateralId,
+    uint8 position,
+    StackAction action,
+    uint8 stackLength,
++   uint256 indexed lienId,
++   Stack stack,
+  );
+```
+[LienToken.sol#L409-L421](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L409-L421)
+```diff
+L410
+-    emit AddLien(
+-      params.lien.collateralId,
+-      uint8(params.stack.length),
+-      lienId,
+-      newStackSlot
+-    );
+    emit LienStackUpdated(
+      params.lien.collateralId,
+      uint8(params.stack.length),
+      StackAction.ADD,
+      uint8(newStack.length)
++     lienId,
++     newStackSlot
+    );
+```
+However for this to work the emmitting of LienStackUpdated in [LienToken.sol#L875-L879](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L875-L879) also needs to be changed. This might lower readability but it's a big gas saver. 
+In addition to this, the [RemovedLiens](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ILienToken.sol#L308) event is never used so it can be removed. 
