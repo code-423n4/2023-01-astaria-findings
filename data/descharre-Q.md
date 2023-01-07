@@ -1,6 +1,6 @@
 # Summary
 |ID     | Finding| Instances |
-|:----: | :---           |              :----:    |  :----:         |
+|:----: | :---           |   :----:         |
 |1       | Use a literal instead of functions for a constant  | 1 |
 | 2      | REQUIRE() OR REVERT() STATEMENTS THAT CHECK INPUT ARGUMENTS SHOULD BE AT THE TOP OF THE FUNCTION| 1 |
 | 3      |Missing error messages in require statements| 1 |
@@ -9,10 +9,13 @@
 | 3      |Miscellaneous| 1 |
 
 # Details
-## 1 
+## 1 Use a literal instead of functions for a constant
 [CollateralToken.sol#L73](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L73)
-
-## 2
+```solidity
+73:       uint256 private constant COLLATERAL_TOKEN_SLOT =
+74:          uint256(keccak256("xyz.astaria.CollateralToken.storage.location")) - 1;
+```
+## 2 REQUIRE() OR REVERT() STATEMENTS THAT CHECK INPUT ARGUMENTS SHOULD BE AT THE TOP OF THE FUNCTION
 [CollateralToken.sol#L564](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L564)
 [PublicVault.sol#L170](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L170)
 
@@ -23,45 +26,100 @@ This can also be done for some if statements
 
 ## 3 Missing error messages in require statements
 Usage of error messages in require statements can help at monitoring and debugging. There is also an option to make these if statements with custom error messages
-- [AstariaRouter.sol#L341](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L341)
-- [AstariaRouter.sol#L347](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L347)
-- [AstariaRouter.sol#L354](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L354)
-- [AstariaRouter.sol#L361](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L361)
-- [ClearingHouse.sol#L72](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol#L72)
-- [ClearingHouse.sol#L199](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol#L199)
-- [ClearingHouse.sol#L216](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol#L216)
-- [ClearingHouse.sol#L223](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol#L223)
-- [CollateralToken.sol#L266](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L266)
-- [CollateralToken.sol#L535](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L535)
-- [CollateralToken.sol#L564](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L564)
-- [LienToken.sol#L504](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L504)
-- [LienToken.sol#L860](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L860)
-- [PublicVault.sol#L241](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L241)
-- [PublicVault.sol#L259](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L259)
-- [PublicVault.sol#L508](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L508)
-- [PublicVault.sol#L672](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L672)
-- [PublicVault.sol#L680](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L680)
-- [PublicVault.sol#L687](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L687)
-- [Vault.sol#L65](https://github.com/code-423n4/2023-01-astaria/blob/main/src/Vault.sol#L65)
-- [Vault.sol#L71](https://github.com/code-423n4/2023-01-astaria/blob/main/src/Vault.sol#L71)
-- [VaultImplementation.sol#L78](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L78)
-- [VaultImplementation.sol#L96](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L96)
-- [VaultImplementation.sol#L105](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L105)
-- [VaultImplementation.sol#L114](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L114)
-- [VaultImplementation.sol#L147](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L147)
-- [VaultImplementation.sol#L191](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L191)
-- [VaultImplementation.sol#L211](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L211)
-- [WithdrawProxy.sol#L138](https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawProxy.sol#L138)
-- [WithdrawProxy.sol#L231](https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawProxy.sol#L231)
 
+File: [AstariaRouter.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol)
+```solidity
+341:     require(msg.sender == s.guardian);
+
+347:     require(msg.sender == s.guardian);
+
+354:     require(msg.sender == s.newGuardian);
+
+361:     require(msg.sender == address(s.guardian));
+```
+File: [ClearingHouse.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol)
+```solidity
+72:       require(msg.sender == address(ASTARIA_ROUTER.LIEN_TOKEN()));
+
+199, 216, 223:     require(msg.sender == address(ASTARIA_ROUTER.COLLATERAL_TOKEN()));
+```
+
+File: [CollateralToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol)
+```solidity
+266:       require(ownerOf(collateralId) == msg.sender);
+
+535:       require(msg.sender == clearingHouse);
+
+565:       require(ERC721(msg.sender).ownerOf(tokenId_) == address(this));
+```
+
+File: [LienToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol)
+```solidity
+504:       msg.sender == address(s.COLLATERAL_TOKEN.getClearingHouse(collateralId))
+
+860:       require(position < length);
+```
+File: [PublicVault.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol)
+```solidity
+241, 259:     require(s.allowList[receiver]);
+
+508:     require(msg.sender == owner());
+
+672, 687:     require(
+                currentEpoch != 0 &&
+                msg.sender == s.epochData[currentEpoch - 1].withdrawProxy
+            );
+
+680:     require(msg.sender == address(LIEN_TOKEN()));
+```
+
+File: [Vault.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/Vault.sol)
+```solidity
+65:       require(s.allowList[msg.sender] && receiver == owner());
+
+71:       require(msg.sender == owner());;
+```
+
+File: [VaultImplementation.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol)
+```solidity
+78, 96, 105, 114, 147, 211:         require(msg.sender == owner()); //owner is "strategist"
+
+191:       require(msg.sender == address(ROUTER()));
+
+```
+File: [WithdrawProxy.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawProxy.sol)
+```solidity
+138:       require(msg.sender == VAULT(), "only vault can mint");
+
+231:       require(msg.sender == VAULT(), "only vault can call");
+```
 ## 4 Add natspec documenation
 Add more documentation to the functions, preferrably natspec documentation. Right now, natspec is only used at a few functions so it's hard to read the code.
-##5 useless functions
-- [CollateralToken.sol#L206-208](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L206-208)
+
+## 5 useless functions
+[CollateralToken.sol#L206-208](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L206-208)
+```solidity
+function file(File calldata incoming) public requiresAuth {
+    _file(incoming);
+  }
+```
 file() function is useless, it's better to make the _file() function public with the modifier requiresAuth().
 ## Miscellaneous
 ### Casting to uint256 is not necessary
-[AstariaRouter.sol#L531-L540](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L531-L540)
+[AstariaRouter.sol#L531-L541](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L531-L541)
+```solidity
+531:    return
+532:      _newVault(
+533:        s,
+534:        underlying,
+535:        uint256(0),
+536:        delegate,
+537:        uint256(0),
+538:        true,
+539        allowList,
+540:        uint256(0)
+541      );
+```
 ### Redundant checking of address(0)
 [AstariaRouter.sol#L364-L390](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L364-L390)
 Potential fix:
