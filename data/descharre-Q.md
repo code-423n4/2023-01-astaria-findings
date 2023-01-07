@@ -17,7 +17,8 @@
 [PublicVault.sol#L170](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L170)
 
 This can also be done for some if statements
-[CollateralToken.sol#L109-L134](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L109-L134)
+[CollateralToken.sol#L338-L340](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L338-L340)
+[CollateralToken.sol#L564](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L564)
 [AstariaRouter.sol#L466](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L466)
 
 ## 3 Missing error messages in require statements
