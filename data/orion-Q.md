@@ -1,3 +1,5 @@
+**note** I mistakenly set it as low QA while it’s medium severity (swc 131)
+
 The deposit function on vault contract transfer from the msg.sender to the owner 
 
 ‘’’
