@@ -225,3 +225,37 @@ struct LienActionEncumber {
     Stack[] stack;
   }
 ```
+### Function validateLien can be a modifier
+Since function [validateLien](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L562-L267) doesn't return anything useful it can be a modifier instead.
+
+```diff
+L562
+-   function validateLien(Lien memory lien) public view returns (uint256 lienId) {
++   modifier validateLien(Lien  memory lien) {
+-    lienId = uint256(keccak256(abi.encode(lien)));
++   uint256 lienId = uint256(keccak256(abi.encode(lien)));
+    if (!_exists(lienId)) {
+      revert InvalidState(InvalidStates.INVALID_LIEN_ID);
+    }
++   _;
+  }
+```
+```diff
+L742
+-  function getOwed(Stack memory stack) external view returns (uint88) {
++  function getOwed(Stack  memory stack) external  view validateLien(stack.lien) returns (uint88) {
+-    validateLien(stack.lien);
+    return _getOwed(stack, block.timestamp);
+  }
+
+  function getOwed(Stack memory stack, uint256 timestamp)
+    external
+-   view
++   view validateLien(stack.lien)
+    returns (uint88)
+  {
+-   validateLien(stack.lien);
+    return _getOwed(stack, timestamp);
+  }
+```
+For this to work you need to remove the [validateLien](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/ILienToken.sol#L98-L101) function in the LienToken interface.
