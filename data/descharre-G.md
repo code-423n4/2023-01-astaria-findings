@@ -6,6 +6,7 @@
 | 3      |Uint8 is more expensive than uint256 when it takes up a whole storage slot | 18| 1 |
 | 4      |Combine 2 structs when they are almost identical | 18| 1 |
 | 5      |Pass struct with position as paremeter instead of array of struct and position | 18| 1 |
+| 6      |If statement is unnecessary | 18| 1 |
 | 3      |Miscellaneous| 0| 1 |
 
 ## Details
@@ -270,4 +271,15 @@ L645
 +   delete stack;
     ""
   }
+```
+## 6 if statement is unnecessary 
+[PublicVault.sol#L103-L107](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L103-L107)
+Deposit function avg gas saved: 735
+Decimals will always be 18 in this case.
+```solidity
+    if (ERC20(asset()).decimals() == uint8(18)) {
+      return 100 gwei;
+    } else {
+      return 10**(ERC20(asset()).decimals() - 1);
+    }
 ```
