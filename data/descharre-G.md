@@ -184,7 +184,7 @@ In addition to this, the [RemovedLiens](https://github.com/code-423n4/2023-01-as
   }
 ```
 |Function name | uint8: avg gas|   uint256: avg gas| gas saved|
-|:----: | :---           |              :----:    |  :----:         |   :----:         |
+|:----: | :---           |              :----:    |  :----:         |  
 |buyoutLien| 54205 | 53882| 323 |
 | createLien|84971 | 84805|166 |
 | getAuctionLiquidator|31078 | 31078 |0 |
@@ -198,3 +198,5 @@ In addition to this, the [RemovedLiens](https://github.com/code-423n4/2023-01-as
 | makePayment|42967| 42790| 177|
 |payDebtViaClearingHouse|51430| 51358| 72|
 |stopLiens|297791| 297687|104 |
+
+Total gas saved: 1244
