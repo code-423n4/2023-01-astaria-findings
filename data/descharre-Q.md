@@ -1,4 +1,11 @@
 # Summary
+## Low Risk
+|ID     | Finding| Instances |
+|:----: | :---           |   :----:         |
+|1       | Add an if check to ensure the shares are not higher than the allowance  | 1 |
+|2       | balanceOf will not underflow  | 1 |
+
+## Non critical
 |ID     | Finding| Instances |
 |:----: | :---           |   :----:         |
 |1       | Use a literal instead of functions for a constant  | 1 |
@@ -10,7 +17,28 @@
 | 7     |TokenURI returns empty string| 1 |
 | 3      |Miscellaneous| 1 |
 
+
 # Details
+# Low Risk
+## 1 Add an if check to ensure the shares are not higher than the allowance
+[PublicVault.sol#L159-L165](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L159-L165)
+```diff
+    if (msg.sender != owner) {
+      uint256 allowed = es.allowance[owner][msg.sender]; // Saves gas for limited approvals.
++     require(shares>= allowed, "ERC20: insufficient allowance");
+      if (allowed != type(uint256).max) {
+        es.allowance[owner][msg.sender] = allowed - shares;
+      }
+    }
+```
+## 1 balanceOf will not underflow
+Comment says it will underflow when the balance is not enough, however this is not true. It's not unchecked and when the solidity version is higher than 0.8.0 it will throw an error whenever overflow or underflow occurs.
+[PublicVault.sol#L174](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L174)
+```solidity
+L173     //this will underflow if not enough balance
+L174     es.balanceOf[owner] -= shares;
+```
+# Non critical
 ## 1 Use a literal instead of functions for a constant
 [CollateralToken.sol#L73](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L73)
 ```solidity
@@ -23,6 +51,11 @@
 51:          uint256(keccak256("xyz.astaria.LienToken.storage.location")) - 1;
 
 53:       bytes32 constant ACTIVE_AUCTION = bytes32("ACTIVE_AUCTION");
+```
+[PublicVault.sol#L53](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L53)
+```solidity
+53:      uint256 private constant PUBLIC_VAULT_SLOT =
+54:        uint256(keccak256("xyz.astaria.PublicVault.storage.location")) - 1;
 ```
 ## 2 REQUIRE() OR REVERT() STATEMENTS THAT CHECK INPUT ARGUMENTS SHOULD BE AT THE TOP OF THE FUNCTION
 [CollateralToken.sol#L564](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L564)
@@ -259,3 +292,4 @@ L742
   }
 ```
 For this to work you need to remove the [validateLien](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/ILienToken.sol#L98-L101) function in the LienToken interface.
+Same thing can be done for [_exists](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/ILienToken.sol#L385-L387) function.
