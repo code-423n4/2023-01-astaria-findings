@@ -134,9 +134,9 @@ file() function is useless, it's better to make the _file() function public with
 ```
 ## 6 Rename
 ### Rename the FileType of the structs to 'fileType' instead of 'what'
-- [IAstariaRouter.sol#L49-L51](https://github.com/code-423n4/2023-01-astaria/blob/main/src/IAstariaRouter.sol#L49-L51)
-- [ICollateralToken.sol#L82-L83](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ICollateralToken.sol#L82-L83)
-- [ILienToken.sol#L30-L31](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ILienToken.sol#L30-L31)
+- [IAstariaRouter.sol#L49-L51](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interface/IAstariaRouter.sol#L49-L51)
+- [ICollateralToken.sol#L82-L83](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interface/ICollateralToken.sol#L82-L83)
+- [ILienToken.sol#L30-L31](https://github.com/code-423n4/2023-01-astaria/blob/main/interface/src/ILienToken.sol#L30-L31)
 ```solidity
   struct File {
     FileType what;
@@ -213,4 +213,15 @@ uint256 i;
       }
     }
 ```
-
+### ILienToken.Lien can be reformatted to just Lien 
+[ILienToken.sol#L81-L86](https://github.com/code-423n4/2023-01-astaria/blob/main/interface/src/ILienToken.sol#L81-L86)
+The struct is defined in ILienToken interface so there is no point in referencing to the interface to get the Lien struct. It's also a very small gas saver: around 8 gas.
+```diff
+struct LienActionEncumber {
+    uint256 amount;
+    address receiver;
+-   ILienToken.Lien lien;
++   Lien lien;
+    Stack[] stack;
+  }
+```
