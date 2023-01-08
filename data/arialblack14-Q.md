@@ -60,21 +60,8 @@ Change from` _mint` to `_safeMint`.
 |2023-01-astaria/src/WithdrawProxy.sol#L139|[_mint(receiver, shares);](https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawProxy.sol#L139 )|
 ---
 
-## [N-1] Consider adding checks for signature malleability.
 
-### Description
-Consider adding checks for signature malleability
-
-### ✅ Recommendation
-Use OpenZeppelin's ECDSA contract rather than calling ecrecover() directly
-
-### 🔍 Findings:
-| | |
-|---|---|
-|2023-01-astaria/src/VaultImplementation.sol#L246|[address recovered = ecrecover(](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L246 )|
----
-
-## [N-2] Lines are too long.
+## [N-1] Lines are too long.
 
 ### Description
 Usually lines in source code are limited to 80 characters. Today's screens are much larger so it's reasonable to stretch this in some cases. Since the files will most likely reside in GitHub, and GitHub starts using a scroll bar in all cases when the length is over 164 characters, the lines below should be split when they reach that length
