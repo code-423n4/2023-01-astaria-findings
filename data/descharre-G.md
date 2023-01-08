@@ -5,6 +5,7 @@
 | 2      |Redundant event | 18| 1 |
 | 3      |Uint8 is more expensive than uint256 when it takes up a whole storage slot | 18| 1 |
 | 4      |Combine 2 structs when they are almost identical | 18| 1 |
+| 5      |Pass struct with position as paremeter instead of array of struct and position | 18| 1 |
 | 3      |Miscellaneous| 0| 1 |
 
 ## Details
@@ -222,3 +223,51 @@ For the struct point there can be also be gas optimizations if youmake  the 3 va
 -  }
 ```
 function buyoutLien: avg gas saved: 1064
+## 5 Pass struct with position as paremeter instead of array of struct and position
+Average gas saved: 252
+[LienToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L512-L523)
+```diff
+  function _payDebt(
+    LienStorage storage s,
+    address token,
+    uint256 payment,
+    address payer,
+    AuctionStack[] memory stack
+  ) internal returns (uint256 totalSpent) {
+    uint256 i;
+    for (; i < stack.length;) {
+      uint256 spent;
+      unchecked {
+-       spent = _paymentAH(s, token, stack, i, payment, payer);
++       spent = _paymentAH(s, token, stack[i], payment, payer);
+        totalSpent += spent;
+        payment -= spent;
+        ++i;
+      }
+    }
+  }
+  
+_paymentAH()  
+L623
+  function _paymentAH(
+    LienStorage storage s,
+    address token,
+-   AuctionStack[] memory stack,
++   AuctionStack memory stack
+-   uint256 position,
+    uint256 payment,
+    address payer
+  ) internal returns (uint256) {
+-   uint256 lienId = stack[position].lienId;
++   uint256 lienId = stack.lienId;
+-   uint256 end = stack[position].end;
++   uint256 end = stack.end;
+-   uint256 owing = stack[position].amountOwed;
++   uint256 owing = stack.amountOwed;
+    ""
+L645
+-   delete stack[position];
++   delete stack;
+    ""
+  }
+```
