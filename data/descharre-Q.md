@@ -7,6 +7,7 @@
 | 4      |Add natspec documentation| 1 |
 | 5      |Useless functions| 1 |
 | 6     |Rename| 1 |
+| 7     |TokenURI returns empty string| 1 |
 | 3      |Miscellaneous| 1 |
 
 # Details
@@ -106,14 +107,32 @@ File: [WithdrawProxy.sol](https://github.com/code-423n4/2023-01-astaria/blob/mai
 Add more documentation to the functions, preferrably natspec documentation. Right now, natspec is only used at a few functions so it's hard to read the code.
 
 ## 5 useless functions
-[CollateralToken.sol#L206-208](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L206-208)
+[CollateralToken.sol#L206-L208](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L206-L208)
 ```solidity
 function file(File calldata incoming) public requiresAuth {
     _file(incoming);
   }
 ```
 file() function is useless, it's better to make the _file() function public with the modifier requiresAuth().
-## 5 Rename
+
+[LienToken.sol#L277-L289](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L277-L289)
+```solidity
+  function stopLiens(
+    uint256 collateralId,
+    uint256 auctionWindow,
+    Stack[] calldata stack,
+    address liquidator
+  ) external validateStack(collateralId, stack) requiresAuth {
+    _stopLiens(
+      _loadLienStorageSlot(),
+      collateralId,
+      auctionWindow,
+      stack,
+      liquidator
+    );
+  }
+```
+## 6 Rename
 ### Rename the FileType of the structs to 'fileType' instead of 'what'
 - [IAstariaRouter.sol#L49-L51](https://github.com/code-423n4/2023-01-astaria/blob/main/src/IAstariaRouter.sol#L49-L51)
 - [ICollateralToken.sol#L82-L83](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ICollateralToken.sol#L82-L83)
@@ -125,7 +144,22 @@ file() function is useless, it's better to make the _file() function public with
   }
 ```
 'What' isn't a professional naming and filetype makes it easier to read.
-
+## 7 TokenURI returns empty string
+[LienToken.sol#L348-L358](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L348-L358)
+Might be better to have a simple image for the LienToken
+```solidity
+  function tokenURI(uint256 tokenId)
+    public
+    view
+    override(ERC721, IERC721)
+    returns (string memory)
+  {
+    if (!_exists(tokenId)) {
+      revert InvalidTokenId(tokenId);
+    }
+    return "";
+  }
+```
 ## Miscellaneous
 ### Casting to uint256 is not necessary
 [AstariaRouter.sol#L531-L541](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L531-L541)
@@ -179,3 +213,4 @@ uint256 i;
       }
     }
 ```
+
