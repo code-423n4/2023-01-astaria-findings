@@ -3,6 +3,7 @@
 |:----: | :---           |              :----:    |  :----:         |
 |1       | Storage variables read more than once in a function must be assigned to a memory variable | 100 | 1 |
 | 2      |Redundant event | 18| 1 |
+| 3      |Uint8 is more expensive than uint256 when it takes up a whole storage slot | 18| 1 |
 | 3      |Miscellaneous| 0| 1 |
 
 ## Details
@@ -168,3 +169,32 @@ L410
 ```
 However for this to work the emmitting of LienStackUpdated in [LienToken.sol#L875-L879](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L875-L879) also needs to be changed. This might lower readability but it's a big gas saver. 
 In addition to this, the [RemovedLiens](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ILienToken.sol#L308) event is never used so it can be removed. 
+
+## 3 Uint8 is more expensive than uint256 when it takes up a whole storage slot
+[ILienToken.sol#L60-L67](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ILienToken.sol#L60-L67)
+```diff
+  struct Lien {
+-   uint8 collateralType;
+-   uint256 collateralType 
+    address token; //20
+    address vault; //20
+    bytes32 strategyRoot; //32
+    uint256 collateralId; //32 //contractAddress + tokenId
+    Details details; //32 * 5
+  }
+```
+|Function name | uint8: avg gas|   uint256: avg gas| gas saved|
+|:----: | :---           |              :----:    |  :----:         |   :----:         |
+|buyoutLien| 54205 | 53882| 323 |
+| createLien|84971 | 84805|166 |
+| getAuctionLiquidator|31078 | 31078 |0 |
+| getBuyout|736| 758|-22 |
+| getBuyout|11024|10830| 194|
+| getCollateralState|619| 662|-43 |
+| getOwed|3570| 3433|137 |
+| getOwed|3571| 3480| 91|
+| getPayee|1972| 1883|89 |
+| initialize|161943| 161987| -44|
+| makePayment|42967| 42790| 177|
+|payDebtViaClearingHouse|51430| 51358| 72|
+|stopLiens|297791| 297687|104 |
