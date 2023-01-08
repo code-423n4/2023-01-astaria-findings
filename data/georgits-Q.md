@@ -51,3 +51,10 @@ ERC721.sol: [2](https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe
 
 ## [QA-06] Missing zero address checks
 AstariaRouter.sol: [339](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L339), [712](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L712)
+
+## [QA-07] `initialize` function can be called by anybody
+AstariaRouter.sol : [83](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L83)
+
+CollateralToken.sol: [80](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L80)
+
+LienToken.sol: [59](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L59)
