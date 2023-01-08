@@ -4,6 +4,7 @@
 |1       | Storage variables read more than once in a function must be assigned to a memory variable | 100 | 1 |
 | 2      |Redundant event | 18| 1 |
 | 3      |Uint8 is more expensive than uint256 when it takes up a whole storage slot | 18| 1 |
+| 4      |Combine 2 structs when they are almost identical | 18| 1 |
 | 3      |Miscellaneous| 0| 1 |
 
 ## Details
@@ -170,8 +171,9 @@ L410
 However for this to work the emmitting of LienStackUpdated in [LienToken.sol#L875-L879](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L875-L879) also needs to be changed. This might lower readability but it's a big gas saver. 
 In addition to this, the [RemovedLiens](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ILienToken.sol#L308) event is never used so it can be removed. 
 
-## 3 Uint8 is more expensive than uint256 when it takes up a whole storage slot
-[ILienToken.sol#L60-L67](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ILienToken.sol#L60-L67)
+## 3 Uint smaller then uint256 is more expensive than uint256 when it takes up a whole storage slot
+If your data is smaller, further operations are needed to downscale from 256 bits to 8 bits
+[ILienToken.sol#L60-L67](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/ILienToken.sol#L60-L67)
 ```diff
   struct Lien {
 -   uint8 collateralType;
@@ -200,3 +202,23 @@ In addition to this, the [RemovedLiens](https://github.com/code-423n4/2023-01-as
 |stopLiens|297791| 297687|104 |
 
 Total gas saved: 1244
+Similar result can be made for struct [StrategyDetailsParam](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/IAstariaRouter.sol#L101-L05) and [NewLienRequest](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/IAstariaRouter.sol#112-L121)
+For the struct point there can be also be gas optimizations if youmake  the 3 variables counting up to uint256
+[ILienToken.sol#L69-L74](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/ILienToken.sol#L69-L74)
+
+## 4 Combine 2 structs when they are almost identical
+```diff
+  struct LienActionEncumber {
+    uint256 amount;
+    address receiver;
+    ILienToken.Lien lien;
+    Stack[] stack;
++   uint8 position; 
+  }
+
+-  struct LienActionBuyout {
+-    uint8 position;
+-    LienActionEncumber encumber;
+-  }
+```
+function buyoutLien: avg gas saved: 1064
