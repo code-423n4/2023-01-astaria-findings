@@ -283,3 +283,11 @@ Decimals will always be 18 in this case.
       return 10**(ERC20(asset()).decimals() - 1);
     }
 ```
+## Miscellaneous
+### Unused variable
+deposit() function avg gas saved: 1149
+[PublicVault.sol#L262](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L262)
+assets is never used and never returned.
+```solidity
+L262:   uint256 assets = totalAssets();
+```
