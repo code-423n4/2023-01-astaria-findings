@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "rvierdiiev",
+  "risk": "3",
+  "title": "AstariaRouter._sliceUint works incorrectly",
+  "issueId": 62,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/62"
+}
