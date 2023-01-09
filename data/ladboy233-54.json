@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "Certain function can be blocked if the ERC20 token revert in 0 amount transfer after PublicVault#transferWithdrawReserve is called",
+  "issueId": 54,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/54"
+}
