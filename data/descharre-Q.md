@@ -4,6 +4,7 @@
 |:----: | :---           |   :----:         |
 |1       | Add an if check to ensure the shares are not higher than the allowance  | 1 |
 |2       | balanceOf will not underflow  | 1 |
+|3       | Loan duration for refinancing is 5 days and is calculated from the current time| 1 |
 
 ## Non critical
 |ID     | Finding| Instances |
@@ -31,16 +32,35 @@
       }
     }
 ```
-## 1 balanceOf will not underflow
+## 2 balanceOf will not underflow
 Comment says it will underflow when the balance is not enough, however this is not true. It's not unchecked and when the solidity version is higher than 0.8.0 it will throw an error whenever overflow or underflow occurs.
 [PublicVault.sol#L174](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L174)
 ```solidity
 L173     //this will underflow if not enough balance
 L174     es.balanceOf[owner] -= shares;
 ```
+##3 Loan duration for refinancing is 5 days and is calculated from the current time
+The documentation says that for refinancing one of the following two improvements must be met:
+- The loan interest rate decrease by more than 0.05%.
+- The loan duration increases by more than 14 days.
+However the min loan duration increase is set to 5 days
+[AstariaRouter.sol#L364-L390](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L364-L390)
+```solidity
+119:       s.minDurationIncrease = uint32(5 days);
+
+696:     return
+697:      (newLien.details.rate <= maxNewRate &&
+698:        newLien.details.duration + block.timestamp >=
+699:        stack[position].point.end) ||
+700:       (block.timestamp + newLien.details.duration - stack[position].point.end >=
+701:         s.minDurationIncrease &&
+702:         newLien.details.rate <= stack[position].lien.details.rate);
+```
+This makes it possible to refinance a loan where the duration is not increased by 14 days. 
+The minDurationIncrease is also calculated from the current time. So if we are 5 days in a loan of 10 days. And we refinance a loan of 11 days. This will succeed. I'm not sure if this is an error or if it's supposed to be like that. 
 # Non critical
 ## 1 Use a literal instead of functions for a constant
-[CollateralToken.sol#L73](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L73)
+[CollateralToken.sol#L119](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L119)
 ```solidity
 73:       uint256 private constant COLLATERAL_TOKEN_SLOT =
 74:          uint256(keccak256("xyz.astaria.CollateralToken.storage.location")) - 1;
