@@ -43,7 +43,16 @@ Zero address check for ``_owner`` and ``_authority`` is needed.
 QA6. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/AuthInitializable.sol#L95
 For safety issue, transferring ownership should take two steps, first step is to propose a new pending owner, and the second step is let the new pending owner to accept the proposal and becomes the ownership, maybe using Zeppelin's claimable.sol: https://github.com/aragon/zeppelin-solidity/blob/master/contracts/ownership/Claimable.sol
 
+QA7. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/WithdrawProxy.sol#L302-L304
+It is necessary to check the range of ``liquidationWithdrawRatio`` to make sure it is not greater than 1e18 (100%)
 
+```
+ function setWithdrawRatio(uint256 liquidationWithdrawRatio) public onlyVault {
+      if(liquidationWithdrawRatio > 1e18) revert OutOfRange(liquidationWithdrawRatio);
+
+    _loadSlot().withdrawRatio = liquidationWithdrawRatio.safeCastTo88();
+  }
+```
 
 
 
