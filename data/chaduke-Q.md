@@ -36,4 +36,16 @@ function previewMint(uint256 shares) public view virtual returns (uint256) {
 
 
 ```
+
+QA5. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/AuthInitializable.sol#L41-L45
+Zero address check for ``_owner`` and ``_authority`` is needed.
+
+QA6. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/AuthInitializable.sol#L95
+For safety issue, transferring ownership should take two steps, first step is to propose a new pending owner, and the second step is let the new pending owner to accept the proposal and becomes the ownership, maybe using Zeppelin's claimable.sol: https://github.com/aragon/zeppelin-solidity/blob/master/contracts/ownership/Claimable.sol
+
+
+
+
+
+
  
