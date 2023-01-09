@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "Adversary can game the flashAuction feature to block further flashAuction after trading collateral token and make liquidatorNFTClaim function revert and block liquidation if the NFT is Moonbird",
+  "issueId": 70,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/70"
+}
