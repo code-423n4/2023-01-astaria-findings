@@ -47,17 +47,9 @@ However the min loan duration increase is set to 5 days
 [AstariaRouter.sol#L364-L390](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L364-L390)
 ```solidity
 119:       s.minDurationIncrease = uint32(5 days);
-
-696:     return
-697:      (newLien.details.rate <= maxNewRate &&
-698:        newLien.details.duration + block.timestamp >=
-699:        stack[position].point.end) ||
-700:       (block.timestamp + newLien.details.duration - stack[position].point.end >=
-701:         s.minDurationIncrease &&
-702:         newLien.details.rate <= stack[position].lien.details.rate);
 ```
 This makes it possible to refinance a loan where the duration is not increased by 14 days. 
-The minDurationIncrease is also calculated from the current time. So if we are 5 days in a loan of 10 days. And we refinance a loan of 11 days. This will succeed. I'm not sure if this is an error or if it's supposed to be like that. 
+
 # Non critical
 ## 1 Use a literal instead of functions for a constant
 [CollateralToken.sol#L119](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L119)
