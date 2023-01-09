@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "wallstreetvilkas",
+  "risk": "3",
+  "title": "Check for allowance can be bypassed and the attacker can withdraw as many shares as he wishes (as long as he has them)",
+  "issueId": 64,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/64"
+}
