@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Bnke0x0",
+  "risk": "2",
+  "title": "deposits don't work with fee-on transfer tokens",
+  "issueId": 63,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/63"
+}
