@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Tointer",
+  "risk": "2",
+  "title": "Non-standart decimals token vaults would lead to loss of funds",
+  "issueId": 72,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/72"
+}
