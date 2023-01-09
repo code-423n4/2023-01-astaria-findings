@@ -16,3 +16,24 @@ Wrong documentation, it should end with 125 instead of 116.
 ```
 return _getArgUint256(93); //ends at 125
 ```
+
+QA4. https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/ERC4626-Cloned.sol#L129-L141
+When supply == 0, both ``previewWithdraw()`` and ``previewRedeem()`` returns 10e18, it should return the input instead of a fixed valure regardless of in the input.
+```
+function previewMint(uint256 shares) public view virtual returns (uint256) {
+    uint256 supply = totalSupply(); // Saves an extra SLOAD if totalSupply is non-zero.
+
+    return supply == 0 ? shares : shares.mulDivUp(totalAssets(), supply);
+  }
+
+  function previewWithdraw(
+    uint256 assets
+  ) public view virtual returns (uint256) {
+    uint256 supply = totalSupply(); // Saves an extra SLOAD if totalSupply is non-zero.
+
+    return supply == 0 ? assets : assets.mulDivUp(supply, totalAssets());
+  }
+
+
+```
+ 
