@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "Lack of reasonable boundary for parameter setting in fee setting and liquidation auction length and refinance setting and epoch length",
+  "issueId": 77,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/77"
+}
