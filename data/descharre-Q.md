@@ -12,10 +12,9 @@
 |1       | Use a literal instead of functions for a constant  | 1 |
 | 2      | REQUIRE() OR REVERT() STATEMENTS THAT CHECK INPUT ARGUMENTS SHOULD BE AT THE TOP OF THE FUNCTION| 1 |
 | 3      |Missing error messages in require statements| 1 |
-| 4      |Add natspec documentation| 1 |
-| 5      |Useless functions| 1 |
-| 6     |Rename| 1 |
-| 7     |TokenURI returns empty string| 1 |
+| 4      |Useless functions| 1 |
+| 5     |Rename| 1 |
+| 6     |TokenURI returns empty string| 1 |
 | 3      |Miscellaneous| 1 |
 
 
@@ -148,10 +147,8 @@ File: [WithdrawProxy.sol](https://github.com/code-423n4/2023-01-astaria/blob/mai
 
 231:       require(msg.sender == VAULT(), "only vault can call");
 ```
-## 4 Add natspec documenation
-Add more documentation to the functions, preferrably natspec documentation. Right now, natspec is only used at a few functions so it's hard to read the code.
 
-## 5 useless functions
+## 4 useless functions
 [CollateralToken.sol#L206-L208](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L206-L208)
 ```solidity
 function file(File calldata incoming) public requiresAuth {
@@ -177,7 +174,7 @@ file() function is useless, it's better to make the _file() function public with
     );
   }
 ```
-## 6 Rename
+## 5 Rename
 ### Rename the FileType of the structs to 'fileType' instead of 'what'
 - [IAstariaRouter.sol#L49-L51](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interface/IAstariaRouter.sol#L49-L51)
 - [ICollateralToken.sol#L82-L83](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interface/ICollateralToken.sol#L82-L83)
@@ -189,7 +186,7 @@ file() function is useless, it's better to make the _file() function public with
   }
 ```
 'What' isn't a professional naming and filetype makes it easier to read.
-## 7 TokenURI returns empty string
+## 6 TokenURI returns empty string
 [LienToken.sol#L348-L358](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L348-L358)
 Might be better to have a simple image for the LienToken
 ```solidity
@@ -305,3 +302,12 @@ L742
 ```
 For this to work you need to remove the [validateLien](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/ILienToken.sol#L98-L101) function in the LienToken interface.
 Same thing can be done for [_exists](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/ILienToken.sol#L385-L387) function.
+
+### if statement return nothing when true
+File: [PublicVault.sol#L362-L364](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L362-L364)
+It's better to have a custom error message here
+```solidity
+    if (s.currentEpoch == uint64(0)) {
+      return;
+    }
+```
