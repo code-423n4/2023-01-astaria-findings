@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "rvierdiiev",
+  "risk": "2",
+  "title": "AstariaRouter.isValidRefinance doesn't respond to docs requirenment",
+  "issueId": 97,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/97"
+}
