@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "Should use _safeMint instead of mint in CollateralToken#onERC721Received",
+  "issueId": 83,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/83"
+}
