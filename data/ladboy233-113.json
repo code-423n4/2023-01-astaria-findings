@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": " SOLMATE SAFETRANSFER AND SAFETRANSFERFROM DOES NOT CHECK THE CODESIZE OF THE TOKEN ADDRESS, WHICH MAY LEAD TO FUND LOSS",
+  "issueId": 113,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/113"
+}
