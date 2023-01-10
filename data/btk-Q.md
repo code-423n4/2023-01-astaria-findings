@@ -8,6 +8,7 @@
 | [L-4] | The protocol should include NatSpec                                                |  8      |
 | [L-5] | Avoid shadowing inherited state variables                                          |  1      |
 | [L-6] | No storage gap for upgradeable contracts                                           |  3      |
+| [L-7] | Take warnings seriously                                                            |  5      |
 
 ### Total NC issues
 
@@ -164,6 +165,20 @@ Consider adding a storage gap at the end of the upgradeable abstract contract:
 ```solidity
 uint256[50] private __gap;
 ```
+
+## [L-7] Take warnings seriously
+
+If the compiler warns you about something, you should change it. Even if you do not think that this particular warning has security implications, there might be another issue buried beneath it. Any compiler warning we issue can be silenced by slight changes to the code.
+
+> Ref: https://docs.soliditylang.org/en/v0.8.17/security-considerations.html#take-warnings-seriously
+
+### Lines of code
+
+- [ClearingHouse.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol)
+- [CollateralToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol)
+- [PublicVault.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol)
+- [AstariaRouter.so](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol)
+- [LienToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol)
 
 ## [NC-1] Lack of event emit
 
