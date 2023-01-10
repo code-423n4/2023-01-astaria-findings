@@ -63,5 +63,11 @@ if (block.timestamp >= newSlot.point.end) {
 
 ```
 
+QA9. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/VaultImplementation.sol#L70
+Should include the address of the vault
+```
+emit NonceUpdated(address(this), s.strategistNonce);
+```
+
 
  
