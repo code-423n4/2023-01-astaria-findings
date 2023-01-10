@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "Transaction revert in division by zero error when handling protocol fee if the feeTo address is set but s.protocolFeeDenominator is not set",
+  "issueId": 101,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/101"
+}
