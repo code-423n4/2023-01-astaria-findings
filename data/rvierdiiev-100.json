@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "rvierdiiev",
+  "risk": "3",
+  "title": "LienToken._stopLiens will calculate more owed amount if lien end is ended",
+  "issueId": 100,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/100"
+}
