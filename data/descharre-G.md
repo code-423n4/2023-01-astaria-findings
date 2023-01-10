@@ -291,3 +291,25 @@ assets is never used and never returned.
 ```solidity
 L262:   uint256 assets = totalAssets();
 ```
+
+### currentWithdrawProxy is already defined so there is no need to do it twice
+transferWithdrawReserve() avg gas saved: 81
+On line [L366-L368](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L366-L368) currentWithdrawProxy is defined. However on [L397-L399](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L397-L399) it's defined again exactly in the same way. This can be removed.
+
+On [L402](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L402) it's accessed the same as the variable so it's better to use the memory variable instead of reading from storage again.
+```diff
+L366
+      address currentWithdrawProxy = s
+       .epochData[s.currentEpoch - 1]
+       .withdrawProxy;
+     
+L397
+-      address currentWithdrawProxy = s
+-        .epochData[s.currentEpoch - 1]
+-        .withdrawProxy;
+      uint256 drainBalance = WithdrawProxy(withdrawProxy).drain(
+        s.withdrawReserve,
+-       s.epochData[s.currentEpoch - 1].withdrawProxy
++       currentWithdrawProxy 
+      );
+```
