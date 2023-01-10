@@ -20,6 +20,7 @@
 | [NC-5] | Empty blocks should be removed or Emit something            |  2      |
 | [NC-6] | Reusable require statements should be changed to a modifier |  6      |
 | [NC-7] | Use a more recent version of OpenZeppelin dependencies      |  1      |
+| [NC-8] | Critical changes should use-two step procedure              |  1      |
 
 ## [L-1] Use `safeMint` instead of mint for ERC721
 
@@ -100,8 +101,8 @@ It is a best practice to use the `nonReentrant` modifier when you make external 
 
 ### Lines of code
 
-- [CollateralToken.sol:553](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L553-L600)
-- [AstariaRouter.sol:490](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L490-L520)
+- [CollateralToken.sol:578](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L578)
+- [AstariaRouter.sol:L519](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L519)
 
 ## [L-4] The protocol should include NatSpec
 
@@ -202,12 +203,10 @@ The correct and clear error description explains to the user why the function re
 - [LienToken.sol:504](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L504)
 - [LienToken.sol:860](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L860)
 - [VaultImplementation.sol:78](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L78)
-- [VaultImplementation.sol:96](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L96)
 - [VaultImplementation.sol:105](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L105)
-- [VaultImplementation.sol:114](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L114)
 - [VaultImplementation.sol:147](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L147)
 - [VaultImplementation.sol:191](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L191)
-- [VaultImplementation.sol:211](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L211)
+- [AstariaRouter.sol:361](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L361)
 
 ## [NC-3] Use `bytes.concat()` and `string.concat()`
 
@@ -254,7 +253,7 @@ Usually lines in source code are limited to 80 characters. Today's screens are m
 - [ClearingHouse.sol:180](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol#L180-L186)
 
 ### Recommended Mitigation Steps 
-The code should be refactored such that they no longer exist, or the block should do something useful, such as emitting an event or reverting.
+The empty blocks should do something useful, such as emitting an event or reverting.
 
 ## [NC-6] Reusable require statements should be changed to a modifier
 
@@ -293,3 +292,23 @@ For security, it is best practice to use the latest OpenZeppelin version.
 ### Recommended Mitigation Steps 
 
 Old version of OpenZeppelin is used `(4.6.0)`, newer version can be used [`(4.7.3)`](https://github.com/OpenZeppelin/openzeppelin-contracts/releases/tag/v4.7.3).
+
+## [NC-8] Critical changes should use-two step procedure
+
+The `CollateralToken.sol` inherits the Solmate `Auth.sol` contract, which does not have a two-step procedure for critical changes.
+
+```solidity
+    function transferOwnership(address newOwner) public virtual requiresAuth {
+        owner = newOwner;
+
+        emit OwnershipTransferred(msg.sender, newOwner);
+    }
+```
+
+### Lines of code
+
+- [CollateralToken.sol:27](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L27)
+
+### Recommended Mitigation Steps 
+
+Consider adding two step procedure on the critical functions where the first is announcing a pending new owner and the new address should then claim its ownership.
