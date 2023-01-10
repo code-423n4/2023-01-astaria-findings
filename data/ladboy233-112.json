@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "Adversary can game the liquidation flow by transfering a dust amount of the payment token to ClearingHouse contract to settle the auction if no one buy the auctioned NFT",
+  "issueId": 112,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/112"
+}
