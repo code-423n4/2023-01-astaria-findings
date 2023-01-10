@@ -20,3 +20,7 @@ PublicVault vault = VAULT();
 
 ```
 
+G4. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L275
+Caching ``s.currentEpoch`` can save gas.
+
+
