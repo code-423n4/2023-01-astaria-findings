@@ -69,5 +69,10 @@ Should include the address of the vault
 emit NonceUpdated(address(this), s.strategistNonce);
 ```
 
+QA10. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/WithdrawProxy.sol#L289-L300
+Zero address check for ``withdrawProxy`` is necessary to avoid losing funding. 
+
+
+
 
  
