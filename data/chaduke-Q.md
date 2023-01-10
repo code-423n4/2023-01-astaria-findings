@@ -54,7 +54,14 @@ It is necessary to check the range of ``liquidationWithdrawRatio`` to make sure 
   }
 ```
 
+QA8. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L462
+WE need to check the ``point.end`` for ``newSlot`` as follows:
+```
+if (block.timestamp >= newSlot.point.end) {
+        revert InvalidState(InvalidStates.EXPIRED_LIEN);
+      }
 
+```
 
 
  
