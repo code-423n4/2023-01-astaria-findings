@@ -4,3 +4,11 @@ Caching ``params.encumber.stack[j]`` can save gas:
 Stack stack = params.encumber.stack[j]; 
 
 ```
+
+G2. https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L148
+Introducing a storage variable to store ``s.epochData[epoch].withdrawProxy`` can save gas:
+```
+WithdrawProxy storage wproxy = s.epochData[epoch].withdrawProxy;
+
+```
+
