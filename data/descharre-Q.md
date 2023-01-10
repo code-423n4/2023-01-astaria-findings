@@ -15,6 +15,7 @@
 | 4      |Useless functions| 1 |
 | 5     |Rename| 1 |
 | 6     |TokenURI returns empty string| 1 |
+| 7     |Use a mapping instead of an array if you pla| 1 |
 | 3      |Miscellaneous| 1 |
 
 
@@ -205,6 +206,8 @@ Might be better to have a simple image for the LienToken
 ## Miscellaneous
 ### Casting to uint256 is not necessary
 [AstariaRouter.sol#L531-L541](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L531-L541)
+[PublicVault.sol#L602](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L602)
+The compiler does an implicit convert itself.
 ```solidity
 531:    return
 532:      _newVault(
