@@ -5,7 +5,7 @@
 | 2      |Redundant event | 18| 1 |
 | 3      |Uint8 is more expensive than uint256 when it takes up a whole storage slot | 18| 1 |
 | 4      |Combine 2 structs when they are almost identical | 18| 1 |
-| 5      |Pass struct with position as paremeter instead of array of struct and position | 18| 1 |
+| 5      |Pass struct with position as parameter instead of array of struct and position | 18| 1 |
 | 6      |If statement is unnecessary | 18| 1 |
 | 3      |Miscellaneous| 0| 1 |
 
