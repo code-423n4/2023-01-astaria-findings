@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "Security hook should not be set for a NFT that is not Uniswap V3 Position NFT",
+  "issueId": 109,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/109"
+}
