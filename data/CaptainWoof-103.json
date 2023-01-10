@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "CaptainWoof",
+  "risk": "2",
+  "title": "Transaction order dependence (SWC-114) may cause loss of user funds",
+  "issueId": 103,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/103"
+}
