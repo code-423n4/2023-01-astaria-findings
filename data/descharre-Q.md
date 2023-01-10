@@ -15,7 +15,7 @@
 | 4      |Useless functions| 1 |
 | 5     |Rename| 1 |
 | 6     |TokenURI returns empty string| 1 |
-| 7     |Use a mapping instead of an array if you pla| 1 |
+| 7     |Make require for only owners a modifier| 1 |
 | 3      |Miscellaneous| 1 |
 
 
@@ -50,6 +50,7 @@ However the min loan duration increase is set to 5 days
 ```
 This makes it possible to refinance a loan where the duration is not increased by 14 days. 
 
+
 # Non critical
 ## 1 Use a literal instead of functions for a constant
 [CollateralToken.sol#L119](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L119)
@@ -69,6 +70,22 @@ This makes it possible to refinance a loan where the duration is not increased b
 53:      uint256 private constant PUBLIC_VAULT_SLOT =
 54:        uint256(keccak256("xyz.astaria.PublicVault.storage.location")) - 1;
 ```
+[VaultImplementation.sol#L44-L57](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L44-L57)
+
+```solidity
+44:       bytes32 public constant STRATEGY_TYPEHASH =
+45:        keccak256("StrategyDetails(uint256 nonce,uint256 deadline,bytes32 root)");
+46:
+47:       bytes32 constant EIP_DOMAIN =
+48:        keccak256(
+49:          "EIP712Domain(string version,uint256 chainId,address verifyingContract)"
+50:        );
+51:      bytes32 constant VERSION = keccak256("0");
+
+57:       uint256 private constant VI_SLOT =
+58:         uint256(keccak256("xyz.astaria.VaultImplementation.storage.location")) - 1;
+```
+
 ## 2 REQUIRE() OR REVERT() STATEMENTS THAT CHECK INPUT ARGUMENTS SHOULD BE AT THE TOP OF THE FUNCTION
 [CollateralToken.sol#L564](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L564)
 [PublicVault.sol#L170](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L170)
@@ -203,6 +220,13 @@ Might be better to have a simple image for the LienToken
     return "";
   }
 ```
+## 7 Make modifier for requires that are used a lot
+File: [VaultImplementation.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol)
+require(msg.sender == owner()); is used 6 times in the VaultImplementation contract. It would be better to make this a modifier.
+```solidity
+78, 96, 105, 114, 147, 211: require(msg.sender == owner());
+```
+
 ## Miscellaneous
 ### Casting to uint256 is not necessary
 [AstariaRouter.sol#L531-L541](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L531-L541)
