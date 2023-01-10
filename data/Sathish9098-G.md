@@ -1,6 +1,6 @@
 ##
 
-## [GAS-1]  Instead of using operator && on single require  . Using double REQUIRE  checks can save more gas. After splitting require statement its possible same 8 gas
+## [GAS-1]  Instead of using operator && on single require  . Using double REQUIRE  checks can save more gas. After splitting require statement its possible save 8 gas
 
 BEFORE MIGRATION : 
 
@@ -89,7 +89,7 @@ When fetching data from a storage location, assigning the data to a memory varia
 
 ##
 
-## [GAS-5] Use uint40 Can Increase Gas Cost . Uint256 uses less gas than uint8 in loops and other situations.
+## [GAS-5] Use of uint40 Can Increase Gas Cost . Uint256 uses less gas than uint40 in loops and other situations.
 
 A smart contract's gas consumption can be higher if developers use items that are less than 32 bytes in size because the Ethereum Virtual Machine can only handle 32 bytes at a time. In order to increase the element's size to the necessary size, the EVM has to perform additional operations
 
