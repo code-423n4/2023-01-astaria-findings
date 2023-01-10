@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "seeu",
+  "risk": "2",
+  "title": "Centralization risk: contracts have a single point of control",
+  "issueId": 79,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/79"
+}
