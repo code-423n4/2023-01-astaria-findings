@@ -27,3 +27,7 @@ https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc98
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/WithdrawProxy.sol#L250
 
 s.finalAuctionEnd is uint40, so I think we need to convert block.timestamp to uint40 and then make the comparison. For example use block.timestamp.safeCastTo40().
+
+•	In the ClearingHouse contract and function balanceOfBatch, we are using for loop based on two arrays, we need to first be the sure length of the two arrays is the same.
+
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/ClearingHouse.sol#L96
