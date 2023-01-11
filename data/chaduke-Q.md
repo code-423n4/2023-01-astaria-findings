@@ -72,7 +72,12 @@ emit NonceUpdated(address(this), s.strategistNonce);
 QA10. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/WithdrawProxy.sol#L289-L300
 Zero address check for ``withdrawProxy`` is necessary to avoid losing funding. 
 
+QA11. https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/ERC4626-Cloned.sol#L27
+Wrong check of ``minDepositAmount()``, we should check ``assets`` instead of ``shares``, the correction is:
+```
+require(assets > minDepositAmount(), "VALUE_TOO_SMALL");
 
+```
 
 
  
