@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "Lack of support for ERC20 token that is not 18 decimals in PublicVault.sol",
+  "issueId": 129,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/129"
+}
