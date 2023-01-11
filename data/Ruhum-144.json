@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Ruhum",
+  "risk": "2",
+  "title": "PublicVault's allowList doesn't block unauthorized withdrawals",
+  "issueId": 144,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/144"
+}
