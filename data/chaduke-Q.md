@@ -79,5 +79,10 @@ require(assets > minDepositAmount(), "VALUE_TOO_SMALL");
 
 ```
 
+QA12: https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/ERC4626RouterBase.sol#L48
+We do not need to approve allowance here since there is no need the vault to move funding from the AstariaRouter to the vault or any other account.
+
+
+
 
  
