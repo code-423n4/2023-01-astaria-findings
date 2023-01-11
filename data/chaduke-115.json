@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "chaduke",
+  "risk": "3",
+  "title": "transferAmount is calculated wrongly in function claim() of WithdrawProxy.sol",
+  "issueId": 115,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/115"
+}
