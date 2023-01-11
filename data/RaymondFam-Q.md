@@ -176,3 +176,18 @@ Consider the removing the deprecated code line in the contract instance below:
 ```diff
 - pragma experimental ABIEncoderV2;
 ```
+## Inadequate NatSpec
+Solidity contracts can use a special form of comments, i.e., the Ethereum Natural Language Specification Format (NatSpec) to provide rich documentation for functions, return variables and more. Please visit the following link for further details:
+
+https://docs.soliditylang.org/en/v0.8.16/natspec-format.html
+
+The code bases are in general lacking partial/full NatSpec that will be of added values to the users and developers if adequately provided. 
+
+## Empty Event
+The following event has no parameter in it to emit anything. Although the standard global variables like block.number and block.timestamp will implicitly be tagged along, consider adding some relevant parameters to the make the best out of this emitted event for better support of off-chain logging API.
+
+[File: VaultImplementation.sol#L149](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L149)
+
+```solidity
+    emit VaultShutdown();
+```
