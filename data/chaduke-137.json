@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "chaduke",
+  "risk": "3",
+  "title": "A liquidator provider can steal funding from the Astario contract and mint tokens from a public Vault.",
+  "issueId": 137,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/137"
+}
