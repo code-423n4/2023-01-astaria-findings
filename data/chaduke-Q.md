@@ -82,6 +82,9 @@ require(assets > minDepositAmount(), "VALUE_TOO_SMALL");
 QA12: https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/ERC4626RouterBase.sol#L48
 We do not need to approve allowance here since there is no need the vault to move funding from the AstariaRouter to the vault or any other account. Instead, the user should approve the  AstariaRouter contract ``shares`` of Vaulttokens allowance.
 
+QA13: https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L66
+Zero address check for ``_TRANSFER_PROXY`` is necessary.
+
 
  
 
