@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "RaymondFam",
+  "risk": "2",
+  "title": "Inadequate VIData and its associated function logic in Vault.sol",
+  "issueId": 120,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/120"
+}
