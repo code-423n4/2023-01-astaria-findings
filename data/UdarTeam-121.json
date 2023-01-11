@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "UdarTeam",
+  "risk": "3",
+  "title": "ERC721 can be initialized multiple times.",
+  "issueId": 121,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/121"
+}
