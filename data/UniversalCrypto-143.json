@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "UniversalCrypto",
+  "risk": "3",
+  "title": "Invalid epoch check",
+  "issueId": 143,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/143"
+}
