@@ -5,6 +5,7 @@
 |1       | Add an if check to ensure the shares are not higher than the allowance  | 1 |
 |2       | balanceOf will not underflow  | 1 |
 |3       | Loan duration for refinancing is 5 days and is calculated from the current time| 1 |
+|4       | Other contract addresses can only be set once| 1 |
 
 ## Non critical
 |ID     | Finding| Instances |
@@ -50,7 +51,14 @@ However the min loan duration increase is set to 5 days
 ```
 This makes it possible to refinance a loan where the duration is not increased by 14 days. 
 
+## 4 Other contract addresses can only be set once
+Other contract addresses can only be set once in the initializer. There is no other setter method for this. This makes it so there is no room for error.
+- [AstariaRouter.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol)
+- [CollateralToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol)
+- [LienToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol)
 
+Additionally there can be checks for zero address during initialization.
+Both of these issues can lead to contract reverts and force redeployment.
 # Non critical
 ## 1 Use a literal instead of functions for a constant
 [CollateralToken.sol#L119](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L119)
