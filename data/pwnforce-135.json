@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "pwnforce",
+  "risk": "3",
+  "title": "_redeemFutureEpoch does not check whether the user has enough VaultToken shares",
+  "issueId": 135,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/135"
+}
