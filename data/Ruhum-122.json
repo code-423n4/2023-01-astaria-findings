@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Ruhum",
+  "risk": "3",
+  "title": "Vault's don't verify that a strategy's deadline has passed",
+  "issueId": 122,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/122"
+}
