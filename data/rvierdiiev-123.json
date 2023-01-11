@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "rvierdiiev",
+  "risk": "2",
+  "title": "User can lose funds if he withdraws from WithdrawProxy before all funds are sent",
+  "issueId": 123,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/123"
+}
