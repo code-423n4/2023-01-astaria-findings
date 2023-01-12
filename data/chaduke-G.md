@@ -16,3 +16,5 @@ G3. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21
 Deleting this line can save gas since this line is not needed.
 
 
+G4. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L432-L433
+Dropping the second condition since this first condition already implies the second one.
