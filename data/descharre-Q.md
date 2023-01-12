@@ -16,7 +16,7 @@
 | 4      |Useless functions| 1 |
 | 5     |Rename| 1 |
 | 6     |TokenURI returns empty string| 1 |
-| 7     |Make require for only owners a modifier| 1 |
+| 7     |MODIFIER INSTEAD OF DUPLICATE REQUIRE| 1 |
 | 3      |Miscellaneous| 1 |
 
 
@@ -228,12 +228,14 @@ Might be better to have a simple image for the LienToken
     return "";
   }
 ```
-## 7 Make modifier for requires that are used a lot
+## 7 MODIFIER INSTEAD OF DUPLICATE REQUIRE
+require(msg.sender == owner()); is used 6 times in the VaultImplementation contract. It would be better to make this a modifier. This makes it more readable.
 File: [VaultImplementation.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol)
-require(msg.sender == owner()); is used 6 times in the VaultImplementation contract. It would be better to make this a modifier.
 ```solidity
 78, 96, 105, 114, 147, 211: require(msg.sender == owner());
 ```
+File: [WithdrawProxy.sol#L138](https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawProxy.sol#L138)
+Modifier [onlyVault](https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawProxy.sol#L230-233) is available but not used.
 
 ## Miscellaneous
 ### Casting to uint256 is not necessary
