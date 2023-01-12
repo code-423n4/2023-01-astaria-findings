@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Tointer",
+  "risk": "2",
+  "title": "Liens with high enough liquidationInitialAsk cannot be liquidated",
+  "issueId": 160,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/160"
+}
