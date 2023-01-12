@@ -27,3 +27,12 @@ This check is not necessary and can be eliminated to save gas sine this check ha
 
 G7. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L397-L399
 Deleting this line can save gas since we already make such assignment at L366.
+
+G8. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L400-L403
+We can use variable ``currentWithdrawProxy`` to save gas here:
+```
+uint256 drainBalance = WithdrawProxy(withdrawProxy).drain(
+        s.withdrawReserve,
+        currentWithdrawProxy
+      );
+```
