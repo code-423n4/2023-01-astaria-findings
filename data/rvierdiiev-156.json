@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "rvierdiiev",
+  "risk": "2",
+  "title": "PublicVault decimals is 18, however it is actually same as asset.decimals",
+  "issueId": 156,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/156"
+}
