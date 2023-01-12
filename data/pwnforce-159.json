@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "pwnforce",
+  "risk": "2",
+  "title": "USE SAFETRANSFERFROM INSTEAD OF TRANSFERFROM FOR ERC721 TRANSFERS",
+  "issueId": 159,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/159"
+}
