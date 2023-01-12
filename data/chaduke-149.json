@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "chaduke",
+  "risk": "3",
+  "title": "_buyoutLien() of LienToken fails to reconcile the discrepancy between the new lien amount and the buyout amount",
+  "issueId": 149,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/149"
+}
