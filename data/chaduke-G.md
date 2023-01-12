@@ -25,3 +25,5 @@ Caching ``newLien.details.rate`` and ``newLien.details.duration`` can save gas
 G6. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L138-L142
 This check is not necessary and can be eliminated to save gas sine this check has already been conducted inside the previous call `` _createLien(s, params.encumber)``. 
 
+G7. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L397-L399
+Deleting this line can save gas since we already make such assignment at L366.
