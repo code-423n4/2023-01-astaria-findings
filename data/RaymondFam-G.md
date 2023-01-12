@@ -1,7 +1,9 @@
 ## Unneeded functions
-In ClearingHouse.sol, the function parameters of `balanceOf()` and `balanceOfBatch()` aren't utilized in the respective function logic to retrieve any state variables. The code blocks entailed are essentially associated with a pure function logic. Since these external functions are neither called internally nor inheritable in the child contracts, consider removing them to save gas on contract deployment. If need be, `type(uint256).max` can always be coded inline by the calling contracts/functions instead of being externally interacted with.
+In ClearingHouse.sol, the function parameters of `balanceOf()` and `balanceOfBatch()` aren't utilized in the respective function logic to retrieve any state variables. The code blocks entailed are essentially associated with a pure function logic. These external functions are neither called internally nor inherited, and additionally, there are no `override` and/or `virtual` visibility associated.
 
-[File: ClearingHouse.sol#L90-L112](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol#L90-L112)
+Consider removing them to save gas on contract deployment. If need be, `type(uint256).max` can always be coded inline by the calling contracts/functions instead of being externally interacted with.
+
+[File: ClearingHouse.sol#L82-L102](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol#L82-L102)
 
 ```solidity
   function balanceOfBatch(address[] calldata accounts, uint256[] calldata ids)
@@ -192,4 +194,50 @@ Consider removing this irrelevant emission to save gas both on contract deployme
     emit DelegateUpdated(delegate_);
 -    emit AllowListUpdated(delegate_, true);
   }
+```
+## Functions of similar logic can be merged
+`disableAllowList()` and `enableAllowList()` bear similar (if not identical) logic. 
+
+Consider having them merged as follows to save gas on contract deployment:
+
+[File: VaultImplementation.sol#L104-L117](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L104-L117)
+
+```solidity
+  function toggleAllowList(bool enabled) external virtual {
+    require(msg.sender == owner()); //owner is "strategist"
+    _loadVISlot().allowListEnabled = enabled;
+    emit AllowListEnabled(enabled);
+  }
+```
+## += and -= cost more gas
+`+=` and `-=` generally cost 22 more gas than writing out the assigned equation explicitly. The amount of gas wasted can be quite sizable when repeatedly operated in a loop.
+
+For instance, the `-=` instance below may be refactored as follows:
+
+[File: VaultImplementation.sol#L404](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L404)
+
+```diff
+-        amount -= fee;
++        amount = amount - fee;
+```
+## Unneeded check
+In `deposit()` of ERC4626-Cloned.sol, `shares > minDepositAmount()` signifies that `shares != 0`. As such, the first require statement is just a waste of gas.
+
+Consider having the function refactored as follows:
+
+[File: ERC4626-Cloned.sol#L19-L36](https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/ERC4626-Cloned.sol#L19-L36)
+
+```diff
+  function deposit(uint256 assets, address receiver)
+    public
+    virtual
+    returns (uint256 shares)
+  {
+-    // Check for rounding error since we round down in previewDeposit.
+-    require((shares = previewDeposit(assets)) != 0, "ZERO_SHARES");
+
+-    require(shares > minDepositAmount(), "VALUE_TOO_SMALL");
++    require((shares = previewDeposit(assets)) > minDepositAmount(), "VALUE_TOO_SMALL");
+
+    ...
 ```
