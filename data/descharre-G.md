@@ -283,6 +283,8 @@ Decimals will always be 18 in this case.
       return 10**(ERC20(asset()).decimals() - 1);
     }
 ```
+
+
 ## Miscellaneous
 ### Unused variable
 deposit() function avg gas saved: 1149
