@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "chaduke",
+  "risk": "3",
+  "title": "The transferWithdrawReserve() function fails to decrease   s.withdrawReserveReceived  from s.epochData[s.currentEpoch].withdrawProxy.",
+  "issueId": 169,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/169"
+}
