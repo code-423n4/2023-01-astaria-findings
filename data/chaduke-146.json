@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "chaduke",
+  "risk": "3",
+  "title": "The check of potentialDebt >   params.encumber.stack[j].lien.details.liquidationInitialAsk is not done correctly in LienToken.sol",
+  "issueId": 146,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/146"
+}
