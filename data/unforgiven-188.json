@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "Function processEpoch() in PublicVault would revert when most of the users withdraws their funds because of the underflow for new yIntercept calculation",
+  "issueId": 188,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/188"
+}
