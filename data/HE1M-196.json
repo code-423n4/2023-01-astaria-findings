@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "HE1M",
+  "risk": "2",
+  "title": "Releasing an NFT by the liquidator does not update the mapping `idToUnderlying` and does not burn the `collateralId`",
+  "issueId": 196,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/196"
+}
