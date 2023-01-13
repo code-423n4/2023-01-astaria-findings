@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "inconsistent behivour between mint() and deposit() functions because deposits() compare share amount with minDepositAmount()",
+  "issueId": 180,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/180"
+}
