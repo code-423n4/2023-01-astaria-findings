@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "user fund loss in publicVaults because it's possible to inflate PPS in ERC4626Cloned by early direct transfer of funds to WithdrawProxy and calling claim()",
+  "issueId": 177,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/177"
+}
