@@ -1,4 +1,4 @@
-# VISIBILITY: PUBLIC FUNCTIONS TO EXTERNAL
+# 1. VISIBILITY: PUBLIC FUNCTIONS TO EXTERNAL
 
 ## Impact
 More gas is used.
@@ -33,3 +33,20 @@ https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc98
 
 ## Recommendations
 Changing the visibility to external will save gas and improve code quality. 
+
+
+
+
+# 2. MISSING `private` VISIBILITY KEYWORD FOR `ERC20_SLOT` IN `ERC20Cloned` CONTRACT
+
+## Impact
+Unwanted usage or  access of constant variable.
+
+## Description
+Default visibility of a variable is `internal`, but `ERC20_SLOT` stores the slot value where structure ERC20Data is there. Since no visibility is mentioned, all contracts which inherit this contract can access the variable but it is not necessary. Also, making it `private` saves some gas. 
+
+## Code Instances
+https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/ERC20-Cloned.sol#L13
+
+## Recommendation
+Set ERC20_SLOT variable to `private` visibility. 
