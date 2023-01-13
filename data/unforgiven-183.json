@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "PublicVault logics doesn't support deflationary or rebasing tokens and if attacker create Vault with those type of tokens as underlying token then users would lose funds",
+  "issueId": 183,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/183"
+}
