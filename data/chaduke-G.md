@@ -88,3 +88,13 @@ if (balance < s.expected) {
 
 G12. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/interfaces/IAstariaRouter.sol#L56-L85
 Introducing a constant (such 10,000) as the denomiator for all denominator paramters can save gas. 
+
+G13. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L490-L493
+Using ``*`` instead of ``muldivdown`` can save gas here.
+```
+function _totalAssets(VaultData storage s) internal view returns (uint256) {
+    uint256 delta_t = block.timestamp - s.last;
+    return uint256(s.slope*delta_t) + uint256(s.yIntercept);
+  }
+
+```
