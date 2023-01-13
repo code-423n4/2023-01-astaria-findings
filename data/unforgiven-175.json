@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "Function withdraw() and redeem() in ERC4626RouterBase would revert always because they have unnecessary allowance setting",
+  "issueId": 175,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/175"
+}
