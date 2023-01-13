@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "attacker can cause grief and fund loss for collateral owner because _validateCommitment() allows for anyone to create loan for collateral if receiver is owner or operator",
+  "issueId": 194,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/194"
+}
