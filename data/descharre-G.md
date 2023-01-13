@@ -179,7 +179,7 @@ If your data is smaller, further operations are needed to downscale from 256 bit
 ```diff
   struct Lien {
 -   uint8 collateralType;
--   uint256 collateralType 
++   uint256 collateralType 
     address token; //20
     address vault; //20
     bytes32 strategyRoot; //32
@@ -205,8 +205,8 @@ If your data is smaller, further operations are needed to downscale from 256 bit
 
 Total gas saved: 1244
 Similar result can be made for struct [StrategyDetailsParam](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/IAstariaRouter.sol#L101-L05) and [NewLienRequest](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/IAstariaRouter.sol#112-L121)
-For the struct point there can be also be gas optimizations if youmake  the 3 variables counting up to uint256
-[ILienToken.sol#L69-L74](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/ILienToken.sol#L69-L74)
+For the struct [Point](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/ILienToken.sol#L69-L74) there can be also be gas optimizations if you make the 3 variables counting up to uint256
+
 
 ## 4 Combine 2 structs when they are almost identical
 ```diff
@@ -275,7 +275,7 @@ L645
 ## 6 if statement is unnecessary 
 [PublicVault.sol#L103-L107](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L103-L107)
 Deposit function avg gas saved: 735
-Decimals will always be 18 in this case.
+Decimals will always be 18 in this case so if statement is unnecessarey
 ```solidity
     if (ERC20(asset()).decimals() == uint8(18)) {
       return 100 gwei;
