@@ -6,6 +6,8 @@
 |2       | balanceOf will not underflow  | 1 |
 |3       | Loan duration for refinancing is 5 days| 1 |
 |4       | Other contract addresses can only be set once| 1 |
+|5       | Everyone can call initialize() function| 1 |
+
 
 ## Non critical
 |ID     | Finding| Instances |
@@ -59,6 +61,11 @@ Other contract addresses can only be set once in the initializer. There is no ot
 
 Additionally there can be checks for zero address during initialization.
 Both of these issues can lead to contract reverts and force redeployment.
+## 5 Everyone can call initialize() function
+When the contract is not initialized, the initialize() function can be called by anybody. This can be an issue because the owner will be set in the __initAuth function.
+- [AstariaRouter.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol)
+- [CollateralToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol)
+- [LienToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol)
 # Non critical
 ## 1 Use a literal instead of functions for a constant
 [CollateralToken.sol#L119](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L119)
