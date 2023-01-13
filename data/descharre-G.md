@@ -315,3 +315,20 @@ L397
 +       currentWithdrawProxy 
       );
 ```
+## Using double require instead of && consumes less gas
+[Vault.sol#L59-L69](https://github.com/code-423n4/2023-01-astaria/blob/main/src/Vault.sol#L59-L69)
+Deposit function average gas saved: 10
+```diff
+  function deposit(uint256 amount, address receiver)
+    public
+    virtual
+    returns (uint256)
+  {
+    VIData storage s = _loadVISlot();
+-   require(s.allowList[msg.sender] && receiver == owner());
++   require(s.allowList[msg.sender]);
++   require(receiver == owner());
+    ERC20(asset()).safeTransferFrom(msg.sender, address(this), amount);
+    return amount;
+  }
+```
