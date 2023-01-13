@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "wallstreetvilkas",
+  "risk": "3",
+  "title": "Parameters are controllable by the caller, which allows to withdraw without the auction actually ending",
+  "issueId": 189,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/189"
+}
