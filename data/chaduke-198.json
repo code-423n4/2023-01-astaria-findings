@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "chaduke",
+  "risk": "3",
+  "title": "ERC4626-Cloned.sol fails to make sure the first minting to be 1:1 asset to share price.",
+  "issueId": 198,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/198"
+}
