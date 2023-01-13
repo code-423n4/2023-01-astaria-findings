@@ -1013,7 +1013,7 @@ https://github.com/code-423n4/2023-01-astaria/tree/main/src/TransferProxy.sol#L2
 
 
 
-### <a href="#Summary">[NC&#x2011;14]</a><a name="NC&#x2011;14"> Use a single file for all system-wide constants
+### <a href="#Summary">[NC&#x2011;14]</a><a name="NC&#x2011;14"> NatSpec comments should be increased in contracts
 
 It is recommended that Solidity contracts are fully annotated using NatSpec for all public interfaces (everything in the ABI). It is clearly stated in the Solidity official documentation. In complex projects such as Defi, the interpretation of all functions and their arguments and returns is important for code readability and auditability. https://docs.soliditylang.org/en/v0.8.15/natspec-format.html
 
