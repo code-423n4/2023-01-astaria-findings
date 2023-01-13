@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "if user calls withdraw() of the WithdrawProxy soon he would lose his funds, there is no proper check that WithdrawProxy is in withdrawal state",
+  "issueId": 192,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/192"
+}
