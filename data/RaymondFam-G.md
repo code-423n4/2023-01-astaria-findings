@@ -241,3 +241,42 @@ Consider having the function refactored as follows:
 
     ...
 ```
+## Unneeded code line 
+In `deposit()` of PublicVault.sol, `totalAssets()` is cached but never used in the function call. 
+
+Consider removing this unused line of code to save gas both on contract deployment and function calls:
+
+```diff
+  function deposit(uint256 amount, address receiver)
+    public
+    override(ERC4626Cloned)
+    whenNotPaused
+    returns (uint256)
+  {
+    VIData storage s = _loadVISlot();
+    if (s.allowListEnabled) {
+      require(s.allowList[receiver]);
+    }
+
+-    uint256 assets = totalAssets();
+
+    return super.deposit(amount, receiver);
+  }
+```
+## Unneeded `unit256()` cast
+Casting the numeral `0` to `uint256()` in the following instances is unnecessary and a waste of gas since `0` is already an unsigned integer belonging to any size, i.e. uint8, uint16, ..., uint256.
+
+[File: AstariaRouter.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol)
+
+```solidity
+458:    if (details.rate == uint256(0) || details.rate > s.maxInterestRate) {
+
+535:        uint256(0),
+
+537:        uint256(0),
+
+540:        uint256(0),
+
+724:    if (epochLength > uint256(0)) {
+```
+
