@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "amaechieth",
+  "risk": "3",
+  "title": "DOS in `processEpoch()` may temporarily trap funds",
+  "issueId": 172,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/172"
+}
