@@ -191,3 +191,60 @@ The following event has no parameter in it to emit anything. Although the standa
 ```solidity
     emit VaultShutdown();
 ```
+## Imported library not fully utilized
+SafeCastLib.sol imported in AstariaRouter should be fully utilized, serving also as a measure to synchronize all related casting styles.
+
+[File: AstariaRouter.sol#L112](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L112)
+
+```diff
+-    s.minInterestBPS = uint32((uint256(1e15) * 5) / (365 days));
++    s.minInterestBPS = ((uint256(1e15) * 5) / (365 days)).safeCastTo32;
+```
+## Erroneous `uint256()` cast
+[`stack[position].lien.details.rate`](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/ILienToken.sol#L54), a uint256 variable, is cast into `uint256()` in AstoriaRouter.sol. This cast should have been done on [`s.minInterestBPS`](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/IAstariaRouter.sol#L74), a uint32 variable:
+
+[File: AstariaRouter.sol#L690-L691](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L690-L691)
+
+```diff
+-    uint256 maxNewRate = uint256(stack[position].lien.details.rate) -
+-      s.minInterestBPS;
++    uint256 maxNewRate = stack[position].lien.details.rate -
++      uint256(s.minInterestBPS);
+```
+## `return` statement on named returns
+`_executeCommitment()` in AstariaRouter.sol adopts named returns but still resort to using `return` in its function logic. Consider removing the names to return values or the opposite manner but not the hybrid of both to avoid any unnecessary confusion.
+
+[File: AstariaRouter.sol#L761-L786](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L761-L786)
+
+```diff
+  function _executeCommitment(
+    RouterStorage storage s,
+    IAstariaRouter.Commitment memory c
+  )
+    internal
+    returns (
+      uint256,
+-      ILienToken.Stack[] memory stack,
++      ILienToken.Stack[] memory,
+-      uint256 payout
++      uint256
+    )
+  {
+    uint256 collateralId = c.tokenContract.computeId(c.tokenId);
+
+    if (msg.sender != s.COLLATERAL_TOKEN.ownerOf(collateralId)) {
+      revert InvalidSenderForCollateral(msg.sender, collateralId);
+    }
+    if (!s.vaults[c.lienRequest.strategy.vault]) {
+      revert InvalidVault(c.lienRequest.strategy.vault);
+    }
+    //router must be approved for the collateral to take a loan,
+    return
+      IVaultImplementation(c.lienRequest.strategy.vault).commitToLien(
+        c,
+        address(this)
+      );
+  }
+```
+
+```
