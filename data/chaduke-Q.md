@@ -111,7 +111,13 @@ transferAmount = uint256(s.withdrawRatio).mulDivDown(
         1e18
       );
 ```
-
+QA17. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L586-L588
+The comparison with ``v.depositCap`` should use ``>`` instead of ``>=``.
+```
+if (v.depositCap != 0 && totalAssets() = v.depositCap) {
+      revert InvalidState(InvalidStates.DEPOSIT_CAP_EXCEEDED);
+    }
+```
 
 
 
