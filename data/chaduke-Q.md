@@ -98,6 +98,19 @@ if (v.depositCap != 0 && totalAssets() > v.depositCap) {
 QA15. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L916
 Zero address check for ``newPayee`` is needed. 
 
+QA16. Inconsistent representation of ``s.withdrawRatio`` in terms of # of decimals:
+Below, ``s.withdrawRatio`` is represented as a WAD (18 decimals).
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/WithdrawProxy.sol#L260
+But below, ``s.withdrawRatio`` is represented as 10**ERC20(asset()).decimals(), which depends
+on the particular ``asset()`` used. To make it consistent, we can always use the WAD representation
+for ``s.withdrawRatio``, thus
+
+```
+transferAmount = uint256(s.withdrawRatio).mulDivDown(
+        balance,
+        1e18
+      );
+```
 
 
 
