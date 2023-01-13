@@ -70,3 +70,18 @@ function _removeStackPosition(Stack[] memory stack, uint8 position)
 G10. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L439-L457
 _afterCommitToLien() can be deleted since it is not used anywhere. 
 
+G11. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/WithdrawProxy.sol#L258-L266
+Enclosing this block inside ``unchecked`` can save gas since it is impossible to have underflow/overflow here.
+```
+unchecked{
+if (balance < s.expected) {
+      PublicVault(VAULT()).decreaseYIntercept(
+        (s.expected - balance).mulWadDown(1e18 - s.withdrawRatio)
+      );
+    } else {
+      PublicVault(VAULT()).increaseYIntercept(
+        (balance - s.expected).mulWadDown(1e18 - s.withdrawRatio)
+      );
+    }
+}
+```
