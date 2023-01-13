@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "Function __renounceGuardian() in AstariaRouter set the current guardian to the 0x0 too and if gurdian calls it then contract would be in broken state and all admin access would be lost",
+  "issueId": 193,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/193"
+}
