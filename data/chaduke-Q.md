@@ -126,4 +126,7 @@ Zero address check for ``liquidator`` is needed to avoid losing funding to the z
 QA19. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/AstariaRouter.sol#L293
 Need to check that ``denominator`` is not equal to zero to avoid divide by zero revert. 
 
+QA20: https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L529-L532
+Adding the address of the vault to the event: ``SlopeUpdated(newSlope)`` so that we can monitor which vault's slope has been updated. 
+
  
