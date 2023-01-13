@@ -4,7 +4,7 @@
 |:----: | :---           |   :----:         |
 |1       | Add an if check to ensure the shares are not higher than the allowance  | 1 |
 |2       | balanceOf will not underflow  | 1 |
-|3       | Loan duration for refinancing is 5 days and is calculated from the current time| 1 |
+|3       | Loan duration for refinancing is 5 days| 1 |
 |4       | Other contract addresses can only be set once| 1 |
 
 ## Non critical
