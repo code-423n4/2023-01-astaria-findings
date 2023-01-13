@@ -119,6 +119,8 @@ if (v.depositCap != 0 && totalAssets() = v.depositCap) {
     }
 ```
 
+QA18: https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L281
+Zero address check for ``liquidator`` is needed to avoid losing funding to the zero address
 
 
 
