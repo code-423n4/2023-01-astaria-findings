@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "user fund loss or lock in claim() of the WithdrawProxy because code uses asset's decimal instead of 1e18 for calculating transferAmount",
+  "issueId": 190,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/190"
+}
