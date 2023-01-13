@@ -36,3 +36,35 @@ uint256 drainBalance = WithdrawProxy(withdrawProxy).drain(
         currentWithdrawProxy
       );
 ```
+G9. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L855-L881
+Much gas can be saved with the following implementation since we have less memory copies. 
+```
+function _removeStackPosition(Stack[] memory stack, uint8 position)
+    internal
+    returns (Stack[] memory)
+  {
+    require(position < length);
+
+    for (int i=position; i < length - 1; ) {
+      unchecked {
+        stack[i] = stack[i + 1];
+        ++i;
+      }
+
+      stack.pop();
+    }
+     
+     emit LienStackUpdated(
+      stack[position].lien.collateralId,
+      position,
+      StackAction.REMOVE,
+      uint8(newStack.length)
+    );
+
+    return stack;
+
+  }
+
+
+```
+
