@@ -246,5 +246,3 @@ SafeCastLib.sol imported in AstariaRouter should be fully utilized, serving also
       );
   }
 ```
-
-```
