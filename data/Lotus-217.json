@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Lotus",
+  "risk": "2",
+  "title": "Delete memory variable does not change storage",
+  "issueId": 217,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/217"
+}
