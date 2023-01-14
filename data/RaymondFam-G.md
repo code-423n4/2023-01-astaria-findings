@@ -379,3 +379,31 @@ For instance, the code block below may be refactored as follows:
 +    auctionWindow = s.auctionWindow + (includeBuffer ? s.auctionWindowBuffer : 0);
   }
 ```
+## Division by 1
+Using `mulDivDown` from FixedPointMathLib.sol to divide x * y by 1, the denominator, is a waste of gas.
+
+Consider having the following instance refactored as follows:
+
+[File: PublicVault.sol#L490-L493](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L490-L493)
+
+```diff
+  function _totalAssets(VaultData storage s) internal view returns (uint256) {
+    uint256 delta_t = block.timestamp - s.last;
+-    return uint256(s.slope).mulDivDown(delta_t, 1) + uint256(s.yIntercept);
++    return uint256(s.slope) * delta_t + uint256(s.yIntercept);
+  }
+```
+## Inline over internal
+Internal function entailing only one line of code may be embedded in the calling function(s) to save gas.
+
+Here is an instance entailed:
+
+[File: PublicVault.sol#L556-L560](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L556-L560)
+
+```solidity
+  function _increaseOpenLiens(VaultData storage s, uint64 epoch) internal {
+    unchecked {
+      s.epochData[epoch].liensOpenForEpoch++;
+    }
+  }
+```
