@@ -1,29 +1,35 @@
 ### Total L issues
 
-| Number | Issues Details                                                                     | Context |
-|--------|------------------------------------------------------------------------------------|---------|
-| [L-1] | Use `safeMint` instead of mint for ERC721                                          |  2      |
-| [L-2] | ERC4626 does not work with fee-on-transfer tokens                                  |  1      |
-| [L-3] | Lack of `nonReentrant` modifier                                                    |  2      |
-| [L-4] | The protocol should include NatSpec                                                |  8      |
-| [L-5] | Avoid shadowing inherited state variables                                          |  1      |
-| [L-6] | No storage gap for upgradeable contracts                                           |  3      |
-| [L-7] | Take warnings seriously                                                            |  5      |
+| Number | Issues Details                                                              | Context |
+|--------|-----------------------------------------------------------------------------|---------|
+| [L-01] | Use `safeMint` instead of mint for ERC721                                   |  2      |
+| [L-02] | ERC4626 does not work with fee-on-transfer tokens                           |  1      |
+| [L-03] | ERC4626Cloned 's implmentation is not fully up to EIP-4626's specification  |  1      |
+| [L-04] | Lack of `nonReentrant` modifier                                             |  2      |
+| [L-05] | The protocol should include NatSpec                                         |  8      |
+| [L-06] | Avoid shadowing inherited state variables                                   |  1      |
+| [L-07] | No storage gap for upgradeable contracts                                    |  3      |
+| [L-08] | Take warnings seriously                                                     |  5      |
+| [L-09] | Solmate's SafeTransferLib doesn't check whether the ERC20 contract exists   |  5      |
+
 
 ### Total NC issues
 
-| Number  | Issues Details                                              | Context |
-|---------|-------------------------------------------------------------|---------|
-| [NC-1] | Lack of event emit                                          |  7      |
-| [NC-2] | Require messages are too short and unclear                  |  24     |
-| [NC-3] | Use `bytes.concat()` and `string.concat()`                  |  11     |
-| [NC-4] | Lines are too long                                          |  6      |
-| [NC-5] | Empty blocks should be removed or Emit something            |  2      |
-| [NC-6] | Reusable require statements should be changed to a modifier |  6      |
-| [NC-7] | Use a more recent version of OpenZeppelin dependencies      |  1      |
-| [NC-8] | Critical changes should use-two step procedure              |  1      |
+| Number  | Issues Details                                                   | Context       |
+|---------|------------------------------------------------------------------|---------------|
+| [NC-01] | Lack of event emit                                               |  7            |
+| [NC-02] | Require messages are too short and unclear                       |  24           |
+| [NC-03] | Use `bytes.concat()` and `string.concat()`                       |  11           |
+| [NC-04] | Lines are too long                                               |  6            |
+| [NC-05] | Empty blocks should be removed or Emit something                 |  2            |
+| [NC-06] | Reusable require statements should be changed to a modifier      |  6            |
+| [NC-07] | Use a more recent version of OpenZeppelin dependencies           |  1            |
+| [NC-08] | Critical changes should use-two step procedure                   |  1            |
+| [NC-09] | Include `@return` parameters in NatSpec comments                 | All Contracts |
+| [NC-10] | Function writing does not comply with the `Solidity Style Guide` | All Contracts |
 
-## [L-1] Use `safeMint` instead of mint for ERC721
+
+## [L-01] Use `safeMint` instead of mint for ERC721
 
 ## Impact
 Users could lost their NFTs if `msg.sender` is a contract address that does not support `ERC721`, the NFT can be frozen in the contract forever.
@@ -61,7 +67,7 @@ Use [`_safeMint`](https://github.com/transmissions11/solmate/blob/main/src/token
     }
 ```
 
-## [L-2] ERC4626 does not work with fee-on-transfer tokens
+## [L-02] ERC4626 does not work with fee-on-transfer tokens
 
 ### Impact
 The ERC4626-Cloned.deposit/mint functions do not work well with fee-on-transfer tokens as the `assets` variable is the pre-fee amount, including the fee, whereas the `totalAssets` do not include the fee anymore.
@@ -96,7 +102,32 @@ This can be abused to mint more shares than desired.
 ### Recommended Mitigation Steps 
 `assets` should be the amount excluding the fee (i.e the amount the contract actually received), therefore it's recommended to use the balance change before and after the transfer instead of the amount.
 
-## [L-3] Lack of `nonReentrant` modifier
+## [L-03] ERC4626Cloned 's implmentation is not fully up to EIP-4626's specification
+
+Must return the maximum amount of shares mint would allow to be deposited to receiver and not cause a revert, which must not be higher than the actual maximum that would be accepted (it should underestimate if necessary).
+
+This assumes that the user has infinite assets, i.e. must not rely on balanceOf of asset.
+
+```solidity
+  function maxDeposit(address) public view virtual returns (uint256) {
+    return type(uint256).max;
+  }
+
+  function maxMint(address) public view virtual returns (uint256) {
+    return type(uint256).max;
+  }
+```
+
+Could cause unexpected behavior in the future due to non-compliance with EIP-4626 standard.
+
+### Lines of code
+- [ERC4626-Cloned.sol:147](https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/ERC4626-Cloned.sol#L147-L153)
+
+### Recommended Mitigation Steps 
+
+`maxMint()` and `maxDeposit()` should reflect the limitation of maxSupply.
+
+## [L-04] Lack of `nonReentrant` modifier
 
 It is a best practice to use the `nonReentrant` modifier when you make external calls to untrustable entities because even if an auditor did not think of a way to exploit it, an attacker just might.
 
@@ -105,7 +136,7 @@ It is a best practice to use the `nonReentrant` modifier when you make external 
 - [CollateralToken.sol:578](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L578)
 - [AstariaRouter.sol:L519](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L519)
 
-## [L-4] The protocol should include NatSpec
+## [L-05] The protocol should include NatSpec
 
 It is recommended that Solidity contracts are fully annotated using NatSpec, it is clearly stated in the Solidity official documentation.
 
@@ -128,7 +159,7 @@ It is recommended that Solidity contracts are fully annotated using NatSpec, it 
 
 Include [`NatSpec`](https://docs.soliditylang.org/en/v0.8.15/natspec-format.html) comments in the codebase.
 
-## [L-5] Avoid shadowing inherited state variables
+## [L-06] Avoid shadowing inherited state variables
 
 In `PublicVault.sol` there is a local variable named `owner`, but there is a function named `owner()` in the inherited `AstariaVaultBase.sol` with the same name. This use causes compilers to issue warnings, negatively affecting checking and code readability.
 ```solidity
@@ -145,9 +176,11 @@ In `PublicVault.sol` there is a local variable named `owner`, but there is a fun
 
 Avoid using variables with the same name.
 
-## [L-6] No storage gap for upgradeable contracts
+## [L-07] No storage gap for upgradeable contracts
 
 ### Impact
+
+For upgradeable contracts, inheriting contracts may introduce new variables. In order to be able to add new variables to the upgradeable contract without causing storage collisions, a storage gap should be added to the upgradeable contract.
 
 In order to be able to add new variables to the upgradeable contract without causing storage collisions, a storage gap should be added to the upgradeable contract.
 
@@ -161,12 +194,17 @@ See [this](https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps)
 
 ### Recommended Mitigation Steps 
 
-Consider adding a storage gap at the end of the upgradeable abstract contract:
+Consider adding a storage gap at the end of the upgradeable contract:
 ```solidity
-uint256[50] private __gap;
+  /**
+   * @dev This empty reserved space is put in place to allow future versions to add new
+   * variables without shifting down storage in the inheritance chain.
+   * See https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps
+   */
+  uint256[50] private __gap;
 ```
 
-## [L-7] Take warnings seriously
+## [L-08] Take warnings seriously
 
 If the compiler warns you about something, you should change it. Even if you do not think that this particular warning has security implications, there might be another issue buried beneath it. Any compiler warning we issue can be silenced by slight changes to the code.
 
@@ -180,7 +218,28 @@ If the compiler warns you about something, you should change it. Even if you do 
 - [AstariaRouter.so](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol)
 - [LienToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol)
 
-## [NC-1] Lack of event emit
+## [L-09] Solmate's SafeTransferLib doesn't check whether the ERC20 contract exists 
+
+Solmate's `SafeTransferLib.sol`, which is often used to interact with non-compliant/unsafe ERC20 tokens, does not check whether the ERC20 contract exists. The following code will not revert in case the token doesn't exist.
+
+> Ref: https://github.com/transmissions11/solmate/blob/main/src/utils/SafeTransferLib.sol#L9
+
+### Lines of code
+
+- [AstariaRouter.sol:19](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L19)
+- [ClearingHouse.sol:19](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol#L19)
+- [CollateralToken.sol:32](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L32)
+- [LienToken.sol:36](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L36)
+- [PublicVault.sol:19](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L19)
+- [Vault.sol:17](https://github.com/code-423n4/2023-01-astaria/blob/main/src/Vault.sol#L17)
+- [VaultImplementation.sol:19](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L19)
+- [WithdrawProxy.sol:18](https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawProxy.sol#L18)
+
+### Recommended Mitigation Steps 
+
+Add a contract exist check in functions or use Openzeppelin `safeERC20` instead.
+
+## [NC-01] Lack of event emit
 
 The below methods do not emit an event when the state changes, something that it's very important for dApps and users.
 
@@ -194,7 +253,7 @@ The below methods do not emit an event when the state changes, something that it
 - [LienToken.sol:512](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L512)
 - [LienToken.sol:690](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L690)
 
-## [NC-2] Require messages are too short and unclear
+## [NC-02] Require messages are too short and unclear
 
 The correct and clear error description explains to the user why the function reverts, but the error descriptions below in the project are not self-explanatory. These error descriptions are very important in the debug features of DApps like Tenderly. Error definitions should be added to the require block, not exceeding 32 bytes.
 
@@ -223,7 +282,7 @@ The correct and clear error description explains to the user why the function re
 - [VaultImplementation.sol:191](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L191)
 - [AstariaRouter.sol:361](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L361)
 
-## [NC-3] Use `bytes.concat()` and `string.concat()`
+## [NC-03] Use `bytes.concat()` and `string.concat()`
 
 Solidity version 0.8.4 introduces: 
 - `bytes.concat()` vs `abi.encodePacked(<bytes>,<bytes>)`
@@ -245,7 +304,7 @@ https://docs.soliditylang.org/en/v0.8.17/types.html?highlight=bytes.concat#the-f
 - [ERC20-Cloned.sol:123](https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/ERC20-Cloned.sol#L123)
 - [VaultImplementation.sol:187](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L187)
 
-## [NC-4] Lines are too long
+## [NC-04] Lines are too long
 
 Usually lines in source code are limited to 80 characters. Today's screens are much larger so it's reasonable to stretch this in some cases. Since the files will most likely reside in GitHub, and GitHub starts using a scroll bar in all cases when the length is over 164 characters, the lines below should be split when they reach that length.
 
@@ -260,7 +319,7 @@ Usually lines in source code are limited to 80 characters. Today's screens are m
 - [VaultImplementation.sol:282](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L282)
 - [VaultImplementation.sol:363](https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.sol#L363)
 
-## [NC-5] Empty blocks should be removed or Emit something
+## [NC-05] Empty blocks should be removed or Emit something
 
 ### Lines of code
 
@@ -270,7 +329,7 @@ Usually lines in source code are limited to 80 characters. Today's screens are m
 ### Recommended Mitigation Steps 
 The empty blocks should do something useful, such as emitting an event or reverting.
 
-## [NC-6] Reusable require statements should be changed to a modifier
+## [NC-06] Reusable require statements should be changed to a modifier
 
 ### Lines of code 
 
@@ -290,7 +349,7 @@ modifier onlyOwner() {
 }
 ```
 
-## [NC-7] Use a more recent version of OpenZeppelin dependencies
+## [NC-07] Use a more recent version of OpenZeppelin dependencies
 
 For security, it is best practice to use the latest OpenZeppelin version.
 
@@ -308,7 +367,7 @@ For security, it is best practice to use the latest OpenZeppelin version.
 
 Old version of OpenZeppelin is used `(4.6.0)`, newer version can be used [`(4.7.3)`](https://github.com/OpenZeppelin/openzeppelin-contracts/releases/tag/v4.7.3).
 
-## [NC-8] Critical changes should use-two step procedure
+## [NC-08] Critical changes should use-two step procedure
 
 The `CollateralToken.sol` inherits the Solmate `Auth.sol` contract, which does not have a two-step procedure for critical changes.
 
@@ -327,3 +386,28 @@ The `CollateralToken.sol` inherits the Solmate `Auth.sol` contract, which does n
 ### Recommended Mitigation Steps 
 
 Consider adding two step procedure on the critical functions where the first is announcing a pending new owner and the new address should then claim its ownership.
+
+
+## [NC-09] Include return parameters in NatSpec comments
+
+If Return parameters are declared, you must prefix them with `/// @return`. Some code analysis programs do analysis by reading [NatSpec](https://docs.soliditylang.org/en/v0.8.15/natspec-format.html) details, if they can't see the `@return` tag, they do incomplete analysis.
+
+### Recommended Mitigation Steps
+
+Include the `@return` argument in the NatSpec comments.
+
+## [NC-10] Function writing does not comply with the `Solidity Style Guide`
+
+Ordering helps readers identify which functions they can call and to find the constructor and fallback definitions easier. But there are contracts in the project that do not comply with this.
+
+Functions should be grouped according to their visibility and ordered:
+
+- `constructor()`
+- `receive()`  
+- `fallback()`  
+- `external / public / internal / private`
+- `view / pure`
+
+### Recommended Mitigation Steps
+
+Follow Solidity Style Guide.
