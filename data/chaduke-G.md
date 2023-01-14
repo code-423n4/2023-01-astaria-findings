@@ -105,3 +105,5 @@ This if-block check can be deleted since the modifier ``onlyOwner(collateralId)`
 G15. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/CollateralToken.sol#L342
 This line can be deleted since ``tokenContract`` is not used at all.
 
+G16. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/CollateralToken.sol#L138-L139
+These two lines can be deleted since they are not used afterwards. 
