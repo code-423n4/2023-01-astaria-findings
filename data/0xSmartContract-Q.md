@@ -45,8 +45,9 @@ Total 12 issues
 | [NC-22] |Repeated validation logic can be converted into a function modifier|8 |
 | [NC-23] |ABIEncoderV2 is still valid, but it is deprecated and has no effect|2 |
 | [NC-24] |Avoid _shadowing_ `inherited state variables`|1 |
+| [NC-25] |Defining the `event` in the middle of the contract lowers auditing and code readability |3 |
 
-Total 24 issues
+Total 25 issues
 
 
 ### Suggestions
@@ -1434,6 +1435,30 @@ src/AstariaVaultBase.sol:
 
 **Recommendation:**
 Avoid using variables with the same name, including inherited in the same contract, if used, it must be specified in the NatSpec comments.
+
+
+## [N-25] Defining the event in the middle of the contract lowers auditing and code readability
+
+
+```solidity
+
+3 results - 1 file
+
+src/PublicVault.sol:
+  458  
+  459:   event SlopeUpdated(uint48 newSlope);
+  460  
+
+  530      s.slope = newSlope;
+  531:     emit SlopeUpdated(newSlope);
+  532    }
+
+  566      }
+  567:     emit SlopeUpdated(s.slope);
+  568    }
+```
+It's common practice to collectively describe events per contracts, it's not a strict rule, but it helps with contract readability and organization. The `SlopeUpdated` event here is defined on line 459, it is recommended to put it at the beginning of the contract.
+
 
 ### [S-01] Project Upgrade and Stop Scenario should be
 
