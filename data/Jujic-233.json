@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Jujic",
+  "risk": "2",
+  "title": "Solmate ERC20 safeTransfer() function does not check the code size of the contract ",
+  "issueId": 233,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/233"
+}
