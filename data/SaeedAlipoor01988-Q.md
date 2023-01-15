@@ -31,3 +31,17 @@ s.finalAuctionEnd is uint40, so I think we need to convert block.timestamp to ui
 •	In the ClearingHouse contract and function balanceOfBatch, we are using for loop based on two arrays, we need to first be the sure length of the two arrays is the same.
 
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/ClearingHouse.sol#L96
+
+•	0 address check
+0 address control should be done in these parts;
+
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/AstariaRouter.sol#L339
+
+•	Omissions in Events
+Throughout the codebase, events are generally emitted when sensitive changes are made to the contracts. However, some events are missing important parameters. The events should include the new value and old value where possible.
+
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/AstariaRouter.sol#L339
+
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/AstariaRouter.sol#L273
+
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/AstariaRouter.sol#L359
