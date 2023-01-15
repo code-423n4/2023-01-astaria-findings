@@ -47,8 +47,9 @@ Total 13 issues
 | [NC-23] |ABIEncoderV2 is still valid, but it is deprecated and has no effect|2 |
 | [NC-24] |Avoid _shadowing_ `inherited state variables`|1 |
 | [NC-25] |Defining the `event` in the middle of the contract lowers auditing and code readability |3 |
+| [NC-26] |Incorrect SLOT NatSpec comment in `RouterStorage` struct  |1 |
 
-Total 25 issues
+Total 26 issues
 
 
 ### Suggestions
@@ -1503,6 +1504,57 @@ src/PublicVault.sol:
   568    }
 ```
 It's common practice to collectively describe events per contracts, it's not a strict rule, but it helps with contract readability and organization. The `SlopeUpdated` event here is defined on line 459, it is recommended to put it at the beginning of the contract.
+
+## [N-26] Incorrect SLOT NatSpec comment in `RouterStorage` struct
+
+There is a bug in the 'RouterStorage' struct SLOT NatSpec comment when switching to slot3;
+
+```solidity
+1 result - 1 file
+
+src/interfaces/IAstariaRouter.sol:
+  74      uint32 minInterestBPS; // was uint64
+  75:     //slot 3 +
+  76      address guardian; //20
+```
+
+Recommendation Mitigation Step;
+
+
+```diff
+struct RouterStorage {
+    //slot 1
+    uint32 auctionWindow;                           4 //slot 1 
+    uint32 auctionWindowBuffer;                     4 //slot 1
+    uint32 liquidationFeeNumerator;                 4 //slot 1
+    uint32 liquidationFeeDenominator;               4 //slot 1
+    uint32 maxEpochLength;                          4 //slot 1
+    uint32 minEpochLength;                          4 //slot 1
+    uint32 protocolFeeNumerator;                    4 //slot 1
+    uint32 protocolFeeDenominator;                  4 //slot 1
+
+    ERC20 WETH;  // Non slot
+    ICollateralToken COLLATERAL_TOKEN; // Non slot
+    ILienToken LIEN_TOKEN; // Non slot
+    ITransferProxy TRANSFER_PROXY; // Non slot
+
+    address feeTo;                                  20 //slot 2
+    address BEACON_PROXY_IMPLEMENTATION; 
+    uint88 maxInterestRate;                         11 //slot 2
+    uint32 minInterestBPS;                           4 //slot 3
+-   //slot3 +
+    address guardian;                               20 //slot 3
++  //slot3+
+    address newGuardian;                            20 //slot 4
+    uint32 buyoutFeeNumerator;                       4 //slot 4
+    uint32 buyoutFeeDenominator;                     4 //slot 4
+    uint32 minDurationIncrease;                      4 //slot 4
+    mapping(uint8 => address) strategyValidators;   32 //slot 5
+    mapping(uint8 => address) implementations;      32 //slot 6
+    //A strategist can have many deployed vaults
+    mapping(address => bool) vaults;                32 //slot 7
+  }
+```
 
 
 ### [S-01] Project Upgrade and Stop Scenario should be
