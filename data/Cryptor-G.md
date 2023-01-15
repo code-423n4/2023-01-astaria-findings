@@ -5,7 +5,8 @@ https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc98
 
 can be changed to 
 
- while (i < files.length)
+https://github.com/JJtheAndroid/2023-01-astaria/blob/184c215fd6e4ead237321347ec0c46d94242f544/diff.md
+
 
 it accomplishes the same thing but cheaper. The same issues can be found here; The for loop can be refactored to a while loop 
 
