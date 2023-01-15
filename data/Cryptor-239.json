@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Cryptor",
+  "risk": "2",
+  "title": "Strategists can maliciously lock LPs out of their money using shutdown and then drain the vault using ",
+  "issueId": 239,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/239"
+}
