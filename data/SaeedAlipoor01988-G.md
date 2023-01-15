@@ -73,3 +73,10 @@ https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc98
 •	In the WithdrawProxy contract and claim function we check that if (balance < s.expected), then we use (s.expected - balance).mulWadDown(1e18 - s.withdrawRatio). we can add the unchecked block and add (s.expected - balance).mulWadDown(1e18 - s.withdrawRatio) to it, to decrease gas usage. 
 
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/WithdrawProxy.sol#L260
+
+////////////////////////////////////////////////////////////////////////////// *** //////////////////////////////////////////////////////////////////////////////
+
+<x> += <y> costs more gas than <x> = <x> + <y> for state variables
+Using the addition operator instead of plus-equals saves 113 gas.
+
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/AstariaRouter.sol#L512
