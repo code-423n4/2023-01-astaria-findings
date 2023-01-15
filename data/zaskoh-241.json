@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "zaskoh",
+  "risk": "2",
+  "title": "PublicVaults with an valuable underlying token with less than 18 decimals will exclude users",
+  "issueId": 241,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/241"
+}
