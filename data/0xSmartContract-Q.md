@@ -14,8 +14,9 @@
 |[L-10]| Require messages are too short or not| 22 |
 |[L-11]| Allows malleable SECP256K1 signatures| 1 |
 |[L-12]| Due to the novelty of the ERC4626 standard, it is safer to use as upgradeable| 1 |
+|[L-13]| Type uint256 defined in `LienOpen` event is type uint64 defined in emit, so truncate happens | 1 |
 
-Total 12 issues
+Total 13 issues
 
 
 ### Non-Critical Issues List
@@ -563,6 +564,50 @@ ERC-4626 is a standard to optimize and unify the technical parameters of yield-b
 
 
 ERC4626 Tokenized Vauldt was created 2021-12-22 so this standart is safer to use as upgrade
+
+### [L-13] Type uint256 defined in `LienOpen` event is type uint64 defined in emit, so truncate happens
+
+https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/IPublicVault.sol#L172
+
+
+```solidity
+src/PublicVault.sol:
+
+ 172:   event LienOpen(uint256 lienId, uint256 epoch);
+
+
+  438     */
+  439:   function _afterCommitToLien(
+  440:     uint40 lienEnd,
+  441:     uint256 lienId,
+  442:     uint256 lienSlope
+  443:   ) internal virtual override {
+  444:     VaultData storage s = _loadStorageSlot();
+  445: 
+  446:     // increment slope for the new lien
+  447:     _accrue(s);
+  448:     unchecked {
+  449:       uint48 newSlope = s.slope + lienSlope.safeCastTo48();
+  450:       _setSlope(s, newSlope);
+  451:     }
+  452: 
+  453:     uint64 epoch = getLienEpoch(lienEnd);
+  454: 
+  455:     _increaseOpenLiens(s, epoch);
+  456:     emit LienOpen(lienId, epoch);
+  457:   }
+
+
+```
+Recommended Mitigation Steps
+
+```diff
+
+- 172:   event LienOpen(uint256 lienId, uint256 epoch);
++ 172:   event LienOpen(uint256 lienId, uint64 epoch);
+
+```
+
 
 
 ### [N-01] Insufficient coverage
