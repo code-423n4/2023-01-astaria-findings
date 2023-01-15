@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Praise",
+  "risk": "3",
+  "title": "Invalid IF statement in function claim() in withdrawProxy.sol (Tautology / Contradiction)",
+  "issueId": 230,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/230"
+}
