@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "cccz",
+  "risk": "3",
+  "title": "When Public Vault A buys out Public Vault B's lien tokens, it does not increase Public Vault A's liensOpenForEpoch, which would result in the lien tokens not being repaid",
+  "issueId": 222,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/222"
+}
