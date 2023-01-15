@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Matin",
+  "risk": "2",
+  "title": "Solmate's ERC20 safeTransfer lib DOES NOT CHECK for token contract's existence",
+  "issueId": 234,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/234"
+}
