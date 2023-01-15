@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "cccz",
+  "risk": "3",
+  "title": "When Public Vault A buys out Public Vault B's lien tokens, it does not update Public Vault A's Slope, the wrong Slope will affect the vault valuation",
+  "issueId": 226,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/226"
+}
