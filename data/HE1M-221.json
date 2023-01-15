@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "HE1M",
+  "risk": "2",
+  "title": "Missing check for the NFT ownership during transferring the auctioned NFT",
+  "issueId": 221,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/221"
+}
