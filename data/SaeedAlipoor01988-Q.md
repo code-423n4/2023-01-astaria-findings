@@ -4,6 +4,14 @@ https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc98
 
 For example, in the first block, we make changes on ASTARIA_ROUTER, what If a zero address is entered by mistake? 
 
+related links :
+https://code4rena.com/reports/2022-11-non-fungible#n-03-0-address-check
+
+or when we make any change to important data from the contract we should emit an event including old value and new value.
+
+related link :
+https://code4rena.com/reports/2022-11-non-fungible/#n-04-omissions-in-events
+
 ////////////////////////////////////////////// ***** //////////////////////////////////////////////
 
 •	In PublicVault contract and function _redeemFutureEpoch, we use below code, 
