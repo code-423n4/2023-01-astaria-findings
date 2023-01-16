@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Praise",
+  "risk": "2",
+  "title": "unnamed and unused argument in function _execute() in ClearingHouse.sol",
+  "issueId": 255,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/255"
+}
