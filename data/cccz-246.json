@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "cccz",
+  "risk": "3",
+  "title": "A malicious private vault can preempt the creation of a public vault by transferring lien tokens to the public vault, thereby preventing the borrower from repaying all loans",
+  "issueId": 246,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/246"
+}
