@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "dragotanqueray",
+  "risk": "3",
+  "title": "No Input Validation On _execute or safeTranferFrom",
+  "issueId": 261,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/261"
+}
