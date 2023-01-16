@@ -12,6 +12,9 @@ or when we make any change to important data from the contract we should emit an
 related link :
 https://code4rena.com/reports/2022-11-non-fungible/#n-04-omissions-in-events
 
+same is happening here :
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L82
+
 ////////////////////////////////////////////// ***** //////////////////////////////////////////////
 
 •	In PublicVault contract and function _redeemFutureEpoch, we use below code, 
