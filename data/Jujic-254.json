@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Jujic",
+  "risk": "2",
+  "title": "ERC4626 does not work with fee-on-transfer tokens",
+  "issueId": 254,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/254"
+}
