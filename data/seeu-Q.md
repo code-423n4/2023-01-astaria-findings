@@ -143,7 +143,7 @@ https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawVaultBase.so
 
 - [Unnamed return parameters | Opyn Bull Strategy Contracts Audit](https://blog.openzeppelin.com/opyn-bull-strategy-contracts-audit/#unnamed-return-parameters)
 
-## [L-04] Insecure random number generation, usage of block variables
+## [L-04] Insecure random number generation, use of block variables
 
 ### Description
 
