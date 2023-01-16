@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "cccz",
+  "risk": "2",
+  "title": "When a private vault offers a loan in ERC777 tokens, the private vault can refuse to receive repayment in the safeTransferFrom callback to force liquidation of the borrower's collateral",
+  "issueId": 247,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/247"
+}
