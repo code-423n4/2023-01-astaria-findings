@@ -142,3 +142,18 @@ https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawVaultBase.so
 ### References
 
 - [Unnamed return parameters | Opyn Bull Strategy Contracts Audit](https://blog.openzeppelin.com/opyn-bull-strategy-contracts-audit/#unnamed-return-parameters)
+
+## [L-04] Insecure random number generation, use of block variables
+
+### Description
+
+Bad Randomness arises when the attacker can predict the result of a random number. A miner can choose whether to broadcast or delete a block using a technique known as "selective packing." Because of this, a malevolent miner has the chance to get the outcome they want and forecast random numbers.
+
+### Findings
+
+- [src/CollateralToken.sol#L471](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L471) => `salt: uint256(blockhash(block.number)),`
+
+### Resources
+
+- [Predicting Random Numbers in Ethereum Smart Contracts](https://blog.positive.com/predicting-random-numbers-in-ethereum-smart-contracts-e5358c6b8620)
+- [Bad Randomness | DASP Top 10](https://dasp.co/#item-6)
