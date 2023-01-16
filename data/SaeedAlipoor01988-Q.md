@@ -126,3 +126,11 @@ https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc98
 matches and is related to the payment token address at the below line.
 
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/ClearingHouse.sol#L123
+
+////////////////////////////////////////////// ***** //////////////////////////////////////////////
+
+In Non-Fungible’s security model, users approve their ERC20 / ERC721 / ERC1155 tokens to the target contract, and in the below function, users approve their ERC721 to the ASTARIA_ROUTER.COLLATERAL_TOKEN().getConduit(),
+
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/ClearingHouse.sol#L203
+
+The issue is that there should be a timelock, to give users enough time to withdraw their approvals before some malicious action becomes possible on project and contracts that users approved their ERC721 tokens to them.
