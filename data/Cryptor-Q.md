@@ -30,3 +30,9 @@ https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc98
 The following function can simply just be a variable inside of another function 
 
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/WithdrawProxy.sol#L77
+
+
+#Initialize is susceptible to front running 
+
+the following function is susceptible to a front run attack, allowing the attacker to become the guardian
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/AstariaRouter.sol#L83-L121
