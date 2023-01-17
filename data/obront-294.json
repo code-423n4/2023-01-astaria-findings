@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "obront",
+  "risk": "3",
+  "title": "Transfer amount calculated incorrectly in claim() function, could underflow balance",
+  "issueId": 294,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/294"
+}
