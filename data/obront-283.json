@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "obront",
+  "risk": "2",
+  "title": "Users are forced to approve Router for full collection to use commitToLiens() function",
+  "issueId": 283,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/283"
+}
