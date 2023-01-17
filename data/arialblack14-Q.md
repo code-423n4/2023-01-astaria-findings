@@ -43,23 +43,6 @@ Use oracle instead of `block.timestamp`
 |2023-01-astaria/src/WithdrawProxy.sol#L314|[uint40 auctionEnd = (block.timestamp + finalAuctionDelta).safeCastTo40();](https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawProxy.sol#L314 )|
 ---
 
-## [L-2] `_safeMint()` should be used rather than `_mint()` wherever possible.
-
-### Description
-`_safeMint()` is used along with [IERC721Receiver](https://docs.openzeppelin.com/contracts/2.x/api/token/erc721#IERC721Receiver) that checks if you are sending the minted token to a Contract that is capable to manage NFTs or not. This is to prevent tokens to be lost.
-
-### ✅ Recommendation
-Change from` _mint` to `_safeMint`.
-
-### 🔍 Findings:
-| | |
-|---|---|
-|2023-01-astaria/src/CollateralToken.sol#L588|[_mint(from_, collateralId);](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L588 )|
-|2023-01-astaria/src/LienToken.sol#L455|[_mint(params.receiver, newLienId);](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L455 )|
-|2023-01-astaria/src/PublicVault.sol#L512|[_mint(msg.sender, unclaimed);](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L512 )|
-|2023-01-astaria/src/WithdrawProxy.sol#L139|[_mint(receiver, shares);](https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawProxy.sol#L139 )|
----
-
 
 ## [N-1] Lines are too long.
 
