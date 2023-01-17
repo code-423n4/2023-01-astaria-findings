@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "obront",
+  "risk": "2",
+  "title": "Auction Window automatically includes Buffer and doesn't serve any purpose",
+  "issueId": 282,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/282"
+}
