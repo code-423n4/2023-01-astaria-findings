@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "luciana",
+  "risk": "2",
+  "title": "`payout` to be transferred to the `receiver` can underflow ",
+  "issueId": 300,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/300"
+}
