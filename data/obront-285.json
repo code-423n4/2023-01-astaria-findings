@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "obront",
+  "risk": "3",
+  "title": "If a piece of collateral is claimed by liquidator, it can never be used on the protocol again",
+  "issueId": 285,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/285"
+}
