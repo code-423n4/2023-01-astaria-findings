@@ -23,3 +23,17 @@ https://github.com/code-423n4/2023-01-astaria/blob/main/src/VaultImplementation.
 
 ## Recommendation
 Add a custom error message in all `require` statements
+
+# HAVEN'T DOCUMENTED ABOUT STATE OF NFT IF NO BIDDER IN AUCTION
+
+## Impact
+No clear idea of Liquidation of NFT collateral.
+
+## Description
+Liquidation of NFT is described. When loan length exceeds, liquidation of collateral takes place. A Dutch Auction is conducted for 72 hours for the particular NFT, but documentation never addresses about the condition where no buyer appeared to the auction and NFT goes unsold.
+
+## Instance
+https://docs.astaria.xyz/docs/protocol-mechanics/liquidations#dutch-auctions
+
+## Recommendation 
+Include documentation for this. Suggested to mention the ownership of NFT after Dutch Auction is completed without any buyer. 
