@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Bjorn_bug",
+  "risk": "2",
+  "title": "Lack of overflow check at increaseWithdrawReserveReceived() when setting a new value",
+  "issueId": 299,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/299"
+}
