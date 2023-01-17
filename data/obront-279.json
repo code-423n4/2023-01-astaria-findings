@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "obront",
+  "risk": "2",
+  "title": "Calling mint() on the Router will either revert or lead to stolen assets",
+  "issueId": 279,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/279"
+}
