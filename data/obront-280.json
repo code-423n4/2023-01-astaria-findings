@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "obront",
+  "risk": "2",
+  "title": "Vaults using fee on transfer tokens will not behave as expected",
+  "issueId": 280,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/280"
+}
