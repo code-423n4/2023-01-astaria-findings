@@ -148,3 +148,9 @@ The issue is that there should be a timelock, to give users enough time to withd
 
 related problem is here:
 https://code4rena.com/reports/2022-11-non-fungible/#m-02-hacked-owner-or-malicious-owner-can-immediately-steal-all-assets-on-the-platform
+
+////////////////////////////////////////////// ***** //////////////////////////////////////////////
+
+What I found out is that the vault can be based on any erc20 token. So if I'm not mistaken, what is your strategy to manage deposits with fee-on-transfer/inflationary/deflationary/rebasing tokens?
+
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/Vault.sol#L59
