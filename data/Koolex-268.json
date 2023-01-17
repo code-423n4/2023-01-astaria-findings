@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Koolex",
+  "risk": "3",
+  "title": "Lack of auction existence and payment token validations in Seaport’s callback safeTransferFrom leads to critical impacts",
+  "issueId": 268,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/268"
+}
