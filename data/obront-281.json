@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "obront",
+  "risk": "2",
+  "title": "Users can liquidate themselves before others, allowing them to take 13% above their borrowers",
+  "issueId": 281,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/281"
+}
