@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Bjorn_bug",
+  "risk": "2",
+  "title": "Assumption that the balance of WithdrawProxy contract will have only ERC20 tokens in balance",
+  "issueId": 276,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/276"
+}
