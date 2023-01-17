@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "obront",
+  "risk": "2",
+  "title": "Auction payments don't successfully delete stack because it's a memory variable",
+  "issueId": 290,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/290"
+}
