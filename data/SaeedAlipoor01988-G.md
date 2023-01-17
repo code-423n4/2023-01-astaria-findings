@@ -86,3 +86,28 @@ https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc98
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L525
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L679
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L735
+
+
+////////////////////////////////////////////////////////////////////////////// *** //////////////////////////////////////////////////////////////////////////////
+
+in PublicVault.sol and function _redeemFutureEpoch at below line, 
+
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L167
+
+we make the comparison between epoch from input and s.currentEpoch (reading from storage). this function is internal and getting calls from functions redeemFutureEpoch, withdraw, and redeem. in redeem and withdraw we pass currentEpoch (current epoch) to _redeemFutureEpoch and we don't need again read s.currentEpoch from storage to check the current epoch.
+so every time we call  _redeemFutureEpoch from withdraw and redeem functions, we are wasting gas to again read current epoch from storage. 
+
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L123
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L135
+
+just in redeemFutureEpoch, we can add the below code to check whether the passed epoch to function is the current epoch or no.
+
+    if (epoch < s.currentEpoch) {
+      revert InvalidState(InvalidStates.EPOCH_TOO_LOW);
+    }
+
+then call _redeemFutureEpoch function.
+
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L145
+
+this will save gas and prevent repeat read variable from storage.
