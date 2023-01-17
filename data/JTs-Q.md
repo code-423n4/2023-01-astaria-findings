@@ -11,26 +11,26 @@ DoS attack on a newly created public vault
     --- a/src/test/AstariaTest.t.sol
     +++ b/src/test/AstariaTest.t.sol
     @@ -14,6 +14,7 @@
-     pragma solidity =0.8.17;
-     
-     import "forge-std/Test.sol";
+    pragma solidity =0.8.17;
+    
+    import "forge-std/Test.sol";
     +import "forge-std/StdCheats.sol";
-     
-     import {Authority} from "solmate/auth/Auth.sol";
-     import {FixedPointMathLib} from "solmate/utils/FixedPointMathLib.sol";
+    
+    import {Authority} from "solmate/auth/Auth.sol";
+    import {FixedPointMathLib} from "solmate/utils/FixedPointMathLib.sol";
     @@ -36,7 +37,7 @@ import {Strings2} from "./utils/Strings2.sol";
-     import "./TestHelpers.t.sol";
-     import {OrderParameters} from "seaport/lib/ConsiderationStructs.sol";
-     
+    import "./TestHelpers.t.sol";
+    import {OrderParameters} from "seaport/lib/ConsiderationStructs.sol";
+    
     -contract AstariaTest is TestHelpers {
     +contract AstariaTest is StdCheats, TestHelpers {
-       using FixedPointMathLib for uint256;
-       using CollateralLookup for address;
-       using SafeCastLib for uint256;
+    using FixedPointMathLib for uint256;
+    using CollateralLookup for address;
+    using SafeCastLib for uint256;
     @@ -44,6 +45,44 @@ contract AstariaTest is TestHelpers {
-       event NonceUpdated(uint256 nonce);
-       event VaultShutdown();
- 
+    event NonceUpdated(uint256 nonce);
+    event VaultShutdown();
+    
     +  function testBlockDeposit() external {
     +    // 0. setup roles
     +    address user = _getSigner("user");
@@ -69,6 +69,6 @@ DoS attack on a newly created public vault
     +    return user;
     +  }
     +
-       function testFeesExample() public {
-         uint256 amountOwedToLender = getAmountOwedToLender(15e17, 10e18, 14 days);
-         Fees memory fees = getFeesForLiquidation(
+    function testFeesExample() public {
+        uint256 amountOwedToLender = getAmountOwedToLender(15e17, 10e18, 14 days);
+        Fees memory fees = getFeesForLiquidation(
