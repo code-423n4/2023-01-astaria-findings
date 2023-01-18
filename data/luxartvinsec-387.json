@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "luxartvinsec",
+  "risk": "2",
+  "title": "Bypass of `msg.sender` check in `setAuctionData` function",
+  "issueId": 387,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/387"
+}
