@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbrett8571",
+  "risk": "3",
+  "title": "Unchecked Address Validation in _delegate() Function of BeaconProxy Contract",
+  "issueId": 355,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/355"
+}
