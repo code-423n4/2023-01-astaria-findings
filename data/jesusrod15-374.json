@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "jesusrod15",
+  "risk": "3",
+  "title": "ProtocolFee can be set a to 100% of value and steal all funds of borrow",
+  "issueId": 374,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/374"
+}
