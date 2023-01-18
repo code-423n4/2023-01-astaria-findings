@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "obront",
+  "risk": "3",
+  "title": "Buyouts to not add slope to the receiving vault, opens potential for serious underflow attack vector",
+  "issueId": 366,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/366"
+}
