@@ -6,11 +6,9 @@
 | [L-02] | ERC4626 does not work with fee-on-transfer tokens                           |  1      |
 | [L-03] | ERC4626Cloned 's implmentation is not fully up to EIP-4626's specification  |  1      |
 | [L-04] | Lack of `nonReentrant` modifier                                             |  2      |
-| [L-05] | The protocol should include NatSpec                                         |  8      |
-| [L-06] | Avoid shadowing inherited state variables                                   |  1      |
-| [L-07] | No storage gap for upgradeable contracts                                    |  3      |
-| [L-08] | Take warnings seriously                                                     |  5      |
-| [L-09] | Solmate's SafeTransferLib doesn't check whether the ERC20 contract exists   |  5      |
+| [L-05] | No storage gap for upgradeable contracts                                    |  3      |
+| [L-06] | Take warnings seriously                                                     |  5      |
+| [L-07] | Solmate's SafeTransferLib doesn't check whether the ERC20 contract exists   |  5      |
 
 
 ### Total NC issues
@@ -27,6 +25,8 @@
 | [NC-08] | Critical changes should use-two step procedure                   |  1            |
 | [NC-09] | Include `@return` parameters in NatSpec comments                 | All Contracts |
 | [NC-10] | Function writing does not comply with the `Solidity Style Guide` | All Contracts |
+| [NC-11] | The protocol should include NatSpec                              | 1             |
+| [NC-12] | Avoid shadowing inherited state variables                        | 3             |
 
 
 ## [L-01] Use `safeMint` instead of mint for ERC721
@@ -136,47 +136,7 @@ It is a best practice to use the `nonReentrant` modifier when you make external 
 - [CollateralToken.sol:578](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L578)
 - [AstariaRouter.sol:L519](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L519)
 
-## [L-05] The protocol should include NatSpec
-
-It is recommended that Solidity contracts are fully annotated using NatSpec, it is clearly stated in the Solidity official documentation.
-
-- In complex projects such as Defi, the interpretation of all functions and their arguments and returns is important for code readability and auditability.
-
-- Some code analysis programs do analysis by reading NatSpec details, if they can't see the tags `(@param, @dev, @return)`, they do incomplete analysis.
-
-### Lines of code
-
-- [ClearingHouse.sol:180](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol#L180-L232)
-- [ClearingHouse.sol:36](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol#L36-L102)
-- [WithdrawProxy.sol:230](https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawProxy.sol#L230-L318)
-- [CollateralToken.sol:412](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L412-L545)
-- [PublicVault.sol:611](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L611-L725)
-- [PublicVault.sol:490](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L490-L568)
-- [AstariaRouter.sol:273](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L273-L703)
-- [LienToken.sol:265](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L265-L656)
-
-### Recommended Mitigation Steps 
-
-Include [`NatSpec`](https://docs.soliditylang.org/en/v0.8.15/natspec-format.html) comments in the codebase.
-
-## [L-06] Avoid shadowing inherited state variables
-
-In `PublicVault.sol` there is a local variable named `owner`, but there is a function named `owner()` in the inherited `AstariaVaultBase.sol` with the same name. This use causes compilers to issue warnings, negatively affecting checking and code readability.
-```solidity
-  function owner() public pure returns (address) {
-    return _getArgAddress(21); //ends at 44
-  }
-```
-### Lines of code
-
-- [AstariaVaultBase.sol:36](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaVaultBase.sol#L36)
-- [PublicVault.sol:120](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L120) / [PublicVault.sol:129](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L129) / [PublicVault.sol:141](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L141) / [PublicVault.sol:152](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L152)
-
-### Recommended Mitigation Steps 
-
-Avoid using variables with the same name.
-
-## [L-07] No storage gap for upgradeable contracts
+## [L-05] No storage gap for upgradeable contracts
 
 ### Impact
 
@@ -204,7 +164,7 @@ Consider adding a storage gap at the end of the upgradeable contract:
   uint256[50] private __gap;
 ```
 
-## [L-08] Take warnings seriously
+## [L-06] Take warnings seriously
 
 If the compiler warns you about something, you should change it. Even if you do not think that this particular warning has security implications, there might be another issue buried beneath it. Any compiler warning we issue can be silenced by slight changes to the code.
 
@@ -218,7 +178,7 @@ If the compiler warns you about something, you should change it. Even if you do 
 - [AstariaRouter.so](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol)
 - [LienToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol)
 
-## [L-09] Solmate's SafeTransferLib doesn't check whether the ERC20 contract exists 
+## [L-07] Solmate's SafeTransferLib doesn't check whether the ERC20 contract exists 
 
 Solmate's `SafeTransferLib.sol`, which is often used to interact with non-compliant/unsafe ERC20 tokens, does not check whether the ERC20 contract exists. The following code will not revert in case the token doesn't exist.
 
@@ -411,3 +371,43 @@ Functions should be grouped according to their visibility and ordered:
 ### Recommended Mitigation Steps
 
 Follow Solidity Style Guide.
+
+## [NC-11] The protocol should include NatSpec    
+
+It is recommended that Solidity contracts are fully annotated using NatSpec, it is clearly stated in the Solidity official documentation.
+
+- In complex projects such as Defi, the interpretation of all functions and their arguments and returns is important for code readability and auditability.
+
+- Some code analysis programs do analysis by reading NatSpec details, if they can't see the tags `(@param, @dev, @return)`, they do incomplete analysis.
+
+### Lines of code
+
+- [ClearingHouse.sol:180](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol#L180-L232)
+- [ClearingHouse.sol:36](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol#L36-L102)
+- [WithdrawProxy.sol:230](https://github.com/code-423n4/2023-01-astaria/blob/main/src/WithdrawProxy.sol#L230-L318)
+- [CollateralToken.sol:412](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L412-L545)
+- [PublicVault.sol:611](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L611-L725)
+- [PublicVault.sol:490](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L490-L568)
+- [AstariaRouter.sol:273](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L273-L703)
+- [LienToken.sol:265](https://github.com/code-423n4/2023-01-astaria/blob/main/src/LienToken.sol#L265-L656)
+
+### Recommended Mitigation Steps 
+
+Include [`NatSpec`](https://docs.soliditylang.org/en/v0.8.15/natspec-format.html) comments in the codebase.
+
+## [NC-12] Avoid shadowing inherited state variables         
+
+In `PublicVault.sol` there is a local variable named `owner`, but there is a function named `owner()` in the inherited `AstariaVaultBase.sol` with the same name. This use causes compilers to issue warnings, negatively affecting checking and code readability.
+```solidity
+  function owner() public pure returns (address) {
+    return _getArgAddress(21); //ends at 44
+  }
+```
+### Lines of code
+
+- [AstariaVaultBase.sol:36](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaVaultBase.sol#L36)
+- [PublicVault.sol:120](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L120) / [PublicVault.sol:129](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L129) / [PublicVault.sol:141](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L141) / [PublicVault.sol:152](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L152)
+
+### Recommended Mitigation Steps 
+
+Avoid using variables with the same name.
