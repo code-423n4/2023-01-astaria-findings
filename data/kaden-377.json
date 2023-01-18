@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "kaden",
+  "risk": "2",
+  "title": "Fee on transfer tokens are not supported and will cause losses and unexpected effects",
+  "issueId": 377,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/377"
+}
