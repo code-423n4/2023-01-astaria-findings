@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbepresent",
+  "risk": "3",
+  "title": "Borrower can't repay all debt after transferring his debt to another vault.",
+  "issueId": 303,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/303"
+}
