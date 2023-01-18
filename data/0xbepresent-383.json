@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbepresent",
+  "risk": "2",
+  "title": "Refinancing is accepted even when the interest decrease is less than 0.05%",
+  "issueId": 383,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/383"
+}
