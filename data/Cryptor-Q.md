@@ -26,7 +26,7 @@ The following functions are empty
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/VaultImplementation.sol#L268-L277
 
 
-# Withdraw Proxy function can just be variable instead 
+# Withdraw Proxy function can just be a variable instead 
 The following function can simply just be a variable inside of another function 
 
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/WithdrawProxy.sol#L77
