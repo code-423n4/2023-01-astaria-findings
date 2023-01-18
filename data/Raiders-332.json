@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Raiders",
+  "risk": "3",
+  "title": "INCORRECT BLOCKHASH USAGE LEADS TO ZERO Value of Salt",
+  "issueId": 332,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/332"
+}
