@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbrett8571",
+  "risk": "3",
+  "title": "Overflow vulnerability in the \"finalAuctionEnd\" field of the \"WPStorage\" struct in the \"WithdrawProxy\" contract.",
+  "issueId": 306,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/306"
+}
