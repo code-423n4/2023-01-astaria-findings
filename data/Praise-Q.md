@@ -38,3 +38,13 @@
     return amount;
   }
 ```
+
+## unnamed and unused parameter in function _execute(). "uint256 // space to encode whatever is needed",
+```
+  function _execute(
+    address tokenContract, // collateral token sending the fake nft
+    address to, // buyer
+    uint256 encodedMetaData, //retrieve token address from the encoded data
+   uint256 // space to encode whatever is needed,
+  ) internal { }
+```
