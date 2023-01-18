@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbrett8571",
+  "risk": "3",
+  "title": "disableAllowList, enableAllowList, and modifyAllowList functions are marked as pure, but they are making state changes by reverting the execution.",
+  "issueId": 307,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/307"
+}
