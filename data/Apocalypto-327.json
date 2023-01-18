@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Apocalypto",
+  "risk": "3",
+  "title": "pullToken can be used for phishing attacks",
+  "issueId": 327,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/327"
+}
