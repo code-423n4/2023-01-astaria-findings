@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "SadBase",
+  "risk": "2",
+  "title": "Sudden Change in Router Storage settings may lead to unexpected calculation",
+  "issueId": 340,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/340"
+}
