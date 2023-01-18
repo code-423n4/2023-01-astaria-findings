@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Rolezn",
+  "risk": "2",
+  "title": "Solmate's `safeTransfer` can result in failed transfer with low level call and won't revert as it does not check the codesize of to address, which may lead to loss of funds",
+  "issueId": 322,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/322"
+}
