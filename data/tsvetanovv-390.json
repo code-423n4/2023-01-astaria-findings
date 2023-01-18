@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "tsvetanovv",
+  "risk": "2",
+  "title": "Solmate safeTransfer and safeTansferFrom does not check the code size of the token address",
+  "issueId": 390,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/390"
+}
