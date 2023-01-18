@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "supernova",
+  "risk": "2",
+  "title": "Attacker can change the borrowers vault preference by front running it.  ",
+  "issueId": 371,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/371"
+}
