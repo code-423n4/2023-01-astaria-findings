@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "KIntern_NA",
+  "risk": "2",
+  "title": "ERC777 - Reentrancy bug when `clearingHouse` transfer payment reward to the validator",
+  "issueId": 382,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/382"
+}
