@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "kaden",
+  "risk": "2",
+  "title": "Lack of a maximum vault fee can lead to complete loss of funds for LPs",
+  "issueId": 378,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/378"
+}
