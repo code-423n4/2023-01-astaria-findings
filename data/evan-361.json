@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "evan",
+  "risk": "3",
+  "title": "ClearingHouse paymentToken can be spoofed",
+  "issueId": 361,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/361"
+}
