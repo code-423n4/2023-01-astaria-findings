@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "PaludoX0",
+  "risk": "2",
+  "title": "Borrower cannot lend twice using same parameters during the same epoch ",
+  "issueId": 389,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/389"
+}
