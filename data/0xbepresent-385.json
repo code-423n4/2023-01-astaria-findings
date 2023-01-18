@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbepresent",
+  "risk": "2",
+  "title": "Refinancing terms are accepted even when the duration does not increase more than 5 days.",
+  "issueId": 385,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/385"
+}
