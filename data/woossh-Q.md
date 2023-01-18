@@ -15,3 +15,7 @@ The _generateValidOrderParameters() function does not validate the maxDuration p
 As the maxDuration param is an uint256, an attacker can enter a large number which will set the endtime to an unexpected value.
 
 The _generateValidOrderParameters() is internal but is called by the public function auctionVault() which will also use the unexpected maxDuration value through the _listUnderlyingOnSeaport() function.
+
+
+https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol#L331
+The releaseToAddress() function does not verify the releaseTo param which could lead to a vulnerability where an attacker could release an NFT to an unintended address by providing a malicious input, by providing for example a 0 address.
