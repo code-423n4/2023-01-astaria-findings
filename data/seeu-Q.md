@@ -157,3 +157,25 @@ Bad Randomness arises when the attacker can predict the result of a random numbe
 
 - [Predicting Random Numbers in Ethereum Smart Contracts](https://blog.positive.com/predicting-random-numbers-in-ethereum-smart-contracts-e5358c6b8620)
 - [Bad Randomness | DASP Top 10](https://dasp.co/#item-6)
+
+
+## [L-05] Outdated Compiler Version
+
+### Description
+
+Using an older compiler version might be risky, especially if the version in question has faults and problems that have been made public.
+
+### Findings
+
+- [lib/gpl/src/ERC20-Cloned.sol#L2](https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/ERC20-Cloned.sol#L2) Outdated pragma version => `>=0.8.16`
+- [lib/gpl/src/ERC4626-Cloned.sol#L2](https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/ERC4626-Cloned.sol#L2) Outdated pragma version => `>=0.8.16`
+- [lib/gpl/src/ERC721.sol#L2](https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/ERC721.sol#L2) Outdated pragma version => `^0.8.16`
+- [lib/gpl/src/interfaces/IMulticall.sol#L4](https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/interfaces/IMulticall.sol#L4) Outdated pragma version => `>=0.7.5`
+- [lib/gpl/src/interfaces/IUniswapV3Factory.sol#L2](https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/interfaces/IUniswapV3Factory.sol#L2) Outdated pragma version => `>=0.5.0`
+- [lib/gpl/src/interfaces/IUniswapV3PoolState.sol#L2](https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/interfaces/IUniswapV3PoolState.sol#L2) Outdated pragma version => `>=0.5.0`
+- [lib/gpl/src/interfaces/IWETH9.sol#L1](https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/interfaces/IWETH9.sol#L1) Outdated pragma version => `^0.8.13`
+
+### Resources
+
+- [SWC-102](https://swcregistry.io/docs/SWC-102)
+- [Etherscan Solidity Bug Info](https://etherscan.io/solcbuginfo)
