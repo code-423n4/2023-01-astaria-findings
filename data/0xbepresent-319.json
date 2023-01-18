@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbepresent",
+  "risk": "3",
+  "title": "Liquidity provider funds may be trapped in the vault after lender ask for redeem and the vault refinance a new lien.",
+  "issueId": 319,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/319"
+}
