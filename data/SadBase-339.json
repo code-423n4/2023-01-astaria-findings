@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "SadBase",
+  "risk": "2",
+  "title": "Updating Guardian Address does not emit events",
+  "issueId": 339,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/339"
+}
