@@ -48,3 +48,6 @@
    uint256 // space to encode whatever is needed,
   ) internal { }
 ```
+## implement 2-step transfer process of ownership in AuthInitialized.sol
+
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/AuthInitializable.sol#L95-L100
