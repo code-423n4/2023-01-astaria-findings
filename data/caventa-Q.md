@@ -337,3 +337,166 @@ If you use keccak256(abi.encodePacked(a, b)) and both a and b are dynamic types,
 Change
 
 abi.encodePacked to abi.encode 
+
+10.
+
+I modify the existing test unit of AstariaTest.sol to apply a loan with zero Ether and repay with zero Ether and the test passed.
+
+```
+function testBasicPublicVaultLoan() public {
+    TestNFT nft = new TestNFT(1);
+    address tokenContract = address(nft);
+    uint256 tokenId = uint256(0);
+
+    uint256 initialBalance = WETH9.balanceOf(address(this));
+
+    // create a PublicVault with a 14-day epoch
+    address publicVault = _createPublicVault({
+      strategist: strategistOne,
+      delegate: strategistTwo,
+      epochLength: 14 days
+    });
+
+    // lend 50 ether to the PublicVault as address(1)
+    _lendToVault(
+      Lender({addr: address(1), amountToLend: 50 ether}),
+      publicVault
+    );
+
+    // borrow 10 eth against the dummy NFT
+    (, ILienToken.Stack[] memory stack) = _commitToLien({
+      vault: publicVault,
+      strategist: strategistOne,
+      strategistPK: strategistOnePK,
+      tokenContract: tokenContract,
+      tokenId: tokenId,
+      lienDetails: standardLienDetails,
+      --- amount: 10 ether,
+      +++ amount: 0 ether,
+      isFirstLien: true
+    });
+
+    uint256 collateralId = tokenContract.computeId(tokenId);
+
+    // make sure the borrow was successful
+    --- assertEq(WETH9.balanceOf(address(this)), initialBalance + 10 ether);
+
+    vm.warp(block.timestamp + 9 days);
+
+    --- _repay(stack, 0, 10 ether, address(this));
+    +++ _repay(stack, 0, 0 ether, address(this));
+  }
+```
+
+It does not make sense to borrow or repay 0 ether. I would suggest adding the zero amount checking to
+
+_createLien and _payment internal function of LienTokens.sol
+
+```
+function _createLien(
+    LienStorage storage s,
+    ILienToken.LienActionEncumber memory params
+  ) internal returns (uint256 newLienId, ILienToken.Stack memory newSlot) {
+    if (s.collateralStateHash[params.lien.collateralId] == ACTIVE_AUCTION) {
+      revert InvalidState(InvalidStates.COLLATERAL_AUCTION);
+    }
+    if (
+      params.lien.details.liquidationInitialAsk < params.amount ||
+      params.lien.details.liquidationInitialAsk == 0
+    ) {
+      revert InvalidState(InvalidStates.INVALID_LIQUIDATION_INITIAL_ASK);
+    }
+
+    if (params.stack.length > 0) {
+      if (params.lien.collateralId != params.stack[0].lien.collateralId) {
+        revert InvalidState(InvalidStates.COLLATERAL_MISMATCH);
+      }
+
+      if (params.lien.token != params.stack[0].lien.token) {
+        revert InvalidState(InvalidStates.ASSET_MISMATCH);
+      }
+    }
+
+    +++ require(params.amount > 0, "ZERO amount");
+
+    newLienId = uint256(keccak256(abi.encode(params.lien)));
+    Point memory point = Point({
+      lienId: newLienId,
+      amount: params.amount.safeCastTo88(),
+      last: block.timestamp.safeCastTo40(),
+      end: (block.timestamp + params.lien.details.duration).safeCastTo40()
+    });
+    _mint(params.receiver, newLienId);
+    return (newLienId, Stack({lien: params.lien, point: point}));
+  }
+```
+
+```
+function _payment(
+    LienStorage storage s,
+    Stack[] memory activeStack,
+    uint8 position,
+    uint256 amount,
+    address payer
+  ) internal returns (Stack[] memory, uint256) {
+    Stack memory stack = activeStack[position];
+    uint256 lienId = stack.point.lienId;
+
+    +++ require(amount > 0, "zero Amount");
+
+    if (s.lienMeta[lienId].atLiquidation) {
+      revert InvalidState(InvalidStates.COLLATERAL_AUCTION);
+    }
+    uint64 end = stack.point.end;
+    // Blocking off payments for a lien that has exceeded the lien.end to prevent repayment unless the msg.sender() is the AuctionHouse
+    if (block.timestamp >= end) {
+      revert InvalidLoanState();
+    }
+    uint256 owed = _getOwed(stack, block.timestamp);
+    address lienOwner = ownerOf(lienId);
+    bool isPublicVault = _isPublicVault(s, lienOwner);
+
+    address payee = _getPayee(s, lienId);
+
+    if (amount > owed) amount = owed;
+    if (isPublicVault) {
+      IPublicVault(lienOwner).beforePayment(
+        IPublicVault.BeforePaymentParams({
+          interestOwed: owed - stack.point.amount,
+          amount: stack.point.amount,
+          lienSlope: calculateSlope(stack)
+        })
+      );
+    }
+
+    //bring the point up to block.timestamp, compute the owed
+    stack.point.amount = owed.safeCastTo88();
+    stack.point.last = block.timestamp.safeCastTo40();
+
+    if (stack.point.amount > amount) {
+      stack.point.amount -= amount.safeCastTo88();
+      //      // slope does not need to be updated if paying off the rest, since we neutralize slope in beforePayment()
+      if (isPublicVault) {
+        IPublicVault(lienOwner).afterPayment(calculateSlope(stack));
+      }
+    } else {
+      amount = stack.point.amount;
+      if (isPublicVault) {
+        // since the openLiens count is only positive when there are liens that haven't been paid off
+        // that should be liquidated, this lien should not be counted anymore
+        IPublicVault(lienOwner).decreaseEpochLienCount(
+          IPublicVault(lienOwner).getLienEpoch(end)
+        );
+      }
+      delete s.lienMeta[lienId]; //full delete of point data for the lien
+      _burn(lienId);
+      activeStack = _removeStackPosition(activeStack, position);
+    }
+
+    s.TRANSFER_PROXY.tokenTransferFrom(stack.lien.token, payer, payee, amount);
+
+    emit Payment(lienId, amount);
+    return (activeStack, amount);
+  }
+```
+
