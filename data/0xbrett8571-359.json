@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "Hardcoded String Input for Hash Function Vulnerability in WITHDRAW_PROXY_SLOT Constant",
+  "issueId": 359,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/359"
+}
