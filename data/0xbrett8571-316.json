@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbrett8571",
+  "risk": "3",
+  "title": "Unchecked ERC20 Token Contract Error: Lack of Validity and Existence Verification",
+  "issueId": 316,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/316"
+}
