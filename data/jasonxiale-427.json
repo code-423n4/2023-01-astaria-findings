@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "jasonxiale",
+  "risk": "3",
+  "title": "the borrowed funds can be stealed by imporper protocolFeeNumerator and protocolFeeDenominator",
+  "issueId": 427,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/427"
+}
