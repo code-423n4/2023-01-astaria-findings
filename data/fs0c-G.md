@@ -22,3 +22,16 @@ The local variable in function `LientToken.sol:_paymentAH`  can be removed as it
 ```diff
 uint256 end = stack[position].end;
 ```
+
+## [G-03] Unnecessary use of mulDivDown.
+
+In PublicVault.sol 
+
+```solidity
+function _totalAssets(VaultData storage s) internal view returns (uint256) {
+    uint256 delta_t = block.timestamp - s.last;
+    return uint256(s.slope).mulDivDown(delta_t, 1) + uint256(s.yIntercept);
+  }
+```
+
+`uint256(s.slope).mulDivDown(delta_t, 1)` can be change to `uint256(s.slope)*delta_t` to save gas.
