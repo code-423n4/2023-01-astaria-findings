@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Koolex",
+  "risk": "3",
+  "title": "Lack of StrategyDetailsParam.vault validation allows the borrower to steal all the funds from the vault",
+  "issueId": 409,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/409"
+}
