@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "synackrst",
+  "risk": "2",
+  "title": "Hacked owner or malicious owner can steal user’s ERC20 tokens",
+  "issueId": 450,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/450"
+}
