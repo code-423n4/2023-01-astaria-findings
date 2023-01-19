@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Bjorn_bug",
+  "risk": "3",
+  "title": "ERC4626Cloned at maxDeposit() doesn't verify if the vault is in a \"healthy\" state to allow more deposits",
+  "issueId": 497,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/497"
+}
