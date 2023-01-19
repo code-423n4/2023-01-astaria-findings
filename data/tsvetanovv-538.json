@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "tsvetanovv",
+  "risk": "2",
+  "title": "ERC20 approve fail for some tokens",
+  "issueId": 538,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/538"
+}
