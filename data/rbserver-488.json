@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "rbserver",
+  "risk": "2",
+  "title": "Users are unable to mint shares from a public vault using `AstariaRouter` contract when share price is bigger than one",
+  "issueId": 488,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/488"
+}
