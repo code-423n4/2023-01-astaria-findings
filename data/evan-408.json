@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "evan",
+  "risk": "2",
+  "title": "processEpoch reverts when every liquidity provider withdraws at once",
+  "issueId": 408,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/408"
+}
