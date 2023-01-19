@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "joestakey",
+  "risk": "2",
+  "title": "WithdrawProxy will break if there is a fee-on-transfer underlying",
+  "issueId": 605,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/605"
+}
