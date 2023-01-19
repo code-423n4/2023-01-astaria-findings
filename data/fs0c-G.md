@@ -23,11 +23,20 @@ uint256 i;
 uint256 end = stack[position].end;
 ```
 
-1. The local variable in function `CollateralToken.sol:releaseToAddress`  can be removed as it is not used
+2. The local variable in function `CollateralToken.sol:releaseToAddress`  can be removed as it is not used
 
 ```solidity
     address tokenContract = underlying.tokenContract;
 ```
+
+3. `CollateralToken.sol:liquidatorNFTClaim`
+
+```solidity
+address tokenContract = underlying.tokenContract;
+uint256 tokenId = underlying.tokenId;
+```
+
+Both tokenContract and tokenId are unused.
 
 ## [G-03] Unnecessary use of mulDivDown.
 
