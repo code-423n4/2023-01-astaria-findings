@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Qeew",
+  "risk": "2",
+  "title": "Solmate's ERC20 does not check for token contract's existence",
+  "issueId": 616,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/616"
+}
