@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xcm",
+  "risk": "3",
+  "title": "Attacker can fake an ERC20 token as the `paymentToken` and call ClearingHouse.safeTransferFrom() to prematurely settle the auction, preventing the actual auction from completing",
+  "issueId": 539,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/539"
+}
