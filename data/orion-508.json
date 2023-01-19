@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "orion",
+  "risk": "3",
+  "title": "payDebtViaClearingHouse function is vulnerable to reentrancy attacks",
+  "issueId": 508,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/508"
+}
