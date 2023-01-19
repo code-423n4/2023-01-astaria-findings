@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "evan",
+  "risk": "2",
+  "title": "Public vault slope can overflow",
+  "issueId": 418,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/418"
+}
