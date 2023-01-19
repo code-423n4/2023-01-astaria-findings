@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "joestakey",
+  "risk": "2",
+  "title": "Vault does not work with underlying tokens that have 0 decimals",
+  "issueId": 601,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/601"
+}
