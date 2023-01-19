@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0Kage",
+  "risk": "3",
+  "title": "`Withdraw` function in Astaria Router takes approval for wrong amount leading to possibility of over approvals",
+  "issueId": 467,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/467"
+}
