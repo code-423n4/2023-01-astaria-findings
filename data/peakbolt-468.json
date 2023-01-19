@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "peakbolt",
+  "risk": "3",
+  "title": "Public Vault mint() function always transfer 10e18 worth of asset when totalSupply == 0, potentially transfering more asset than specified",
+  "issueId": 468,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/468"
+}
