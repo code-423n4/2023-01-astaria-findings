@@ -34,7 +34,7 @@ whenNotPaused
 to
 
 ```
-whenNoPausedAndShutdown
+whenNoPausedOrShutdown
 ```
 
 3.
@@ -57,7 +57,7 @@ function pullToken(
 }
 ```
 
-We should remove the payable keyword as the function does not have msg.value in this function and tokenTransferFrom function. See the below tokenTransferFrom function of TransferProxy.sol
+We should remove the payable keyword as there is no msg.value in this function and tokenTransferFrom function. See the tokenTransferFrom function of TransferProxy.sol below
 
 ```
   function tokenTransferFrom(
