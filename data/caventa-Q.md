@@ -186,7 +186,7 @@ And change the settleLiquidatorNFTClaim function
     ---  s.auctionStack.stack
     --- );
 
-    +++ ASTARIA_ROUTER.LIEN_TOKEN().payDebtViaClearingHouse(
+    +++ ASTARIA_ROUTER.LIEN_TOKEN().deleteCollateralStateHashViaClearingHouse(
     +++  COLLATERAL_ID()
     +++);
   }
@@ -276,7 +276,7 @@ We should not check if the collateralId belongs to the msg.sender again as it is
   }
 ```
 
-Change
+Change the following function by remove certain lines
 
 ```
   function releaseToAddress(uint256 collateralId, address releaseTo)
@@ -328,9 +328,9 @@ See Vault.sol
 return string(abi.encodePacked("AST-Vault-", ERC20(asset()).symbol()));
 return string(abi.encodePacked("AST-V", owner(), "-", ERC20(asset()).symbol()));
 
-It is not recommend to encodePacked two strings as string is dynamic type
+It is not recommended to encodePacked two strings as strings because string is a dynamic type variable
 
-See the following comment in https://docs.soliditylang.org/en/v0.8.11/abi-spec.html
+See the following comment at https://docs.soliditylang.org/en/v0.8.11/abi-spec.html
 
 If you use keccak256(abi.encodePacked(a, b)) and both a and b are dynamic types, it is easy to craft collisions in the hash value by moving parts of a into b and vice-versa. More specifically, abi.encodePacked("a", "bc") == abi.encodePacked("ab", "c"). If you use abi.encodePacked for signatures, authentication or data integrity, make sure to always use the same types and check that at most one of them is dynamic. Unless there is a compelling reason, abi.encode should be preferred.
 
@@ -340,7 +340,7 @@ abi.encodePacked to abi.encode
 
 10.
 
-I modify the existing test unit of AstariaTest.sol to apply a loan with zero Ether and repay with zero Ether and the test passed.
+I modify the existing test unit of AstariaTest.sol to apply for a loan with zero Ether and repay with zero Ether and the test passed.
 
 ```
 function testBasicPublicVaultLoan() public {
@@ -500,3 +500,173 @@ function _payment(
   }
 ```
 
+11.
+
+Duplicate public vaults and private vaults can be created if they have the same
+
+address(this),
+vaultType,
+msg.sender,
+underlying,
+block.timestamp,
+epochLength,
+vaultFee
+
+See the _newVault function of AstariaRouter.sol
+
+```
+ function _newVault(
+    RouterStorage storage s,
+    address underlying,
+    uint256 epochLength,
+    address delegate,
+    uint256 vaultFee,
+    bool allowListEnabled,
+    address[] memory allowList,
+    uint256 depositCap
+  ) internal returns (address vaultAddr) {
+    uint8 vaultType;
+
+    if (epochLength > uint256(0)) {
+      vaultType = uint8(ImplementationType.PublicVault);
+    } else {
+      vaultType = uint8(ImplementationType.PrivateVault);
+    }
+
+    //immutable data
+    vaultAddr = ClonesWithImmutableArgs.clone(
+      s.BEACON_PROXY_IMPLEMENTATION,
+      abi.encodePacked(
+        address(this),
+        vaultType,
+        msg.sender,
+        underlying,
+        block.timestamp,
+        epochLength,
+        vaultFee
+      )
+    );
+
+    //mutable data
+    IVaultImplementation(vaultAddr).init(
+      IVaultImplementation.InitParams({
+        delegate: delegate,
+        allowListEnabled: allowListEnabled,
+        allowList: allowList,
+        depositCap: depositCap
+      })
+    );
+
+    s.vaults[vaultAddr] = true;
+
+    emit NewVault(msg.sender, delegate, vaultAddr, vaultType);
+
+    return vaultAddr;
+  }
+```
+
+We don't want this because other loan activities can reuse the same object. And
+
+```
+vaultAddr = ClonesWithImmutableArgs.clone(
+      s.BEACON_PROXY_IMPLEMENTATION,
+      abi.encodePacked(
+        address(this),
+        vaultType,
+        msg.sender,
+        underlying,
+        block.timestamp,
+        epochLength,
+        vaultFee
+      )
+    );
+```
+
+This code still creates different vault Address for the vault objects with the same parameter.
+
+To fix this, add
+
+```
+ mapping(bytes => bool) vaultsSignature
+```
+
+to IAstariaRouter.sol
+
+Then, change the _newVault function
+
+```
+function _newVault(
+    RouterStorage storage s,
+    address underlying,
+    uint256 epochLength,
+    address delegate,
+    uint256 vaultFee,
+    bool allowListEnabled,
+    address[] memory allowList,
+    uint256 depositCap
+  ) internal returns (address vaultAddr) {
+    uint8 vaultType;
+
+    if (epochLength > uint256(0)) {
+      vaultType = uint8(ImplementationType.PublicVault);
+    } else {
+      vaultType = uint8(ImplementationType.PrivateVault);
+    }
+
+    +++ require(
+    +++ s.vaultsSignature[
+    +++ abi.encodePacked(
+    +++ address(this),
+    +++ vaultType,
+    +++ msg.sender,
+    +++ underlying,
+    +++ block.timestamp,
+    +++ epochLength,
+    +++ vaultFee
+    +++ )
+    +++ ], "Vault exists");
+
+    //immutable data
+    vaultAddr = ClonesWithImmutableArgs.clone(
+      s.BEACON_PROXY_IMPLEMENTATION,
+      abi.encodePacked(
+        address(this),
+        vaultType,
+        msg.sender,
+        underlying,
+        block.timestamp,
+        epochLength,
+        vaultFee
+      )
+    );
+
+    //mutable data
+    IVaultImplementation(vaultAddr).init(
+      IVaultImplementation.InitParams({
+        delegate: delegate,
+        allowListEnabled: allowListEnabled,
+        allowList: allowList,
+        depositCap: depositCap
+      })
+    );
+
+    s.vaults[vaultAddr] = true;
+    +++ s.vaultsSignature[
+    +++ abi.encodePacked(
+    +++ address(this),
+    +++ vaultType,
+    +++ msg.sender,
+    +++ underlying,
+    +++ block.timestamp,
+    +++ epochLength,
+    +++ vaultFee
+    +++ )
+    +++ ] = true;
+
+
+    emit NewVault(msg.sender, delegate, vaultAddr, vaultType);
+
+    return vaultAddr;
+  }
+
+```
