@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "cergyk",
+  "risk": "2",
+  "title": "LienToken.sol: Lien ids collision could prevent users from taking multiple loan according to same strategy ",
+  "issueId": 461,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/461"
+}
