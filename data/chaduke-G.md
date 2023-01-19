@@ -107,3 +107,18 @@ This line can be deleted since ``tokenContract`` is not used at all.
 
 G16. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/CollateralToken.sol#L138-L139
 These two lines can be deleted since they are not used afterwards. 
+
+G17. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L154
+Enclosing it inside unchecked can save gas since underflow is impossible due to the check in the for loop.
+In addition, j can be defined outside. 
+```
+uint256 j = i - 1;
+
+```
+
+G18. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L122
+Caching ``params.encumber.stack[params.position]`` can save gas for function ``_buyoutLien()``:
+```
+Stack calldata currentStack = params.encumber.stack[params.position];
+
+```
