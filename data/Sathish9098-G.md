@@ -70,6 +70,22 @@ When fetching data from a storage location, assigning the data to a memory varia
     return super.redeem(shares, receiver, owner);
    }
 
+[FILE: 2023-01-astaria/src/CollateralToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol)
+
+      function isValidOrderIncludingExtraData(
+     bytes32 orderHash,
+    address caller,
+    AdvancedOrder calldata order,
+    bytes32[] calldata priorOrderHashes,
+    CriteriaResolver[] calldata criteriaResolvers
+    ) external view returns (bytes4 validOrderMagicValue) {
+    CollateralStorage storage s = _loadCollateralSlot();
+    return
+      s.collateralIdToAuction[uint256(order.parameters.zoneHash)] == orderHash
+        ? ZoneInterface.isValidOrder.selector
+        : bytes4(0xffffffff);
+     }
+
 ##
 
 ## [GAS-4]  USE FUNCTION INSTEAD OF MODIFIERS
@@ -86,6 +102,32 @@ When fetching data from a storage location, assigning the data to a memory varia
      }
      _;
     }      
+
+[FILE: 2023-01-astaria/src/CollateralToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol)
+
+     modifier releaseCheck(uint256 collateralId) {
+    CollateralStorage storage s = _loadCollateralSlot();
+
+    if (s.LIEN_TOKEN.getCollateralState(collateralId) != bytes32(0)) {
+      revert InvalidCollateralState(InvalidCollateralStates.ACTIVE_LIENS);
+    }
+    if (s.collateralIdToAuction[collateralId] != bytes32(0)) {
+      revert InvalidCollateralState(InvalidCollateralStates.AUCTION_ACTIVE);
+    }
+    _;
+  }
+
+  modifier onlyOwner(uint256 collateralId) {
+    require(ownerOf(collateralId) == msg.sender);
+    _;
+  }
+
+  modifier whenNotPaused() {
+    if (_loadCollateralSlot().ASTARIA_ROUTER.paused()) {
+      revert ProtocolPaused();
+    }
+    _;
+  }
 
 ##
 
