@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0Kage",
+  "risk": "3",
+  "title": "`Withdraw` function of Astaria Router does not reset approvals to 0 when shares burnt is less than maxShares",
+  "issueId": 469,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/469"
+}
