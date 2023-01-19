@@ -407,3 +407,26 @@ Here is an instance entailed:
     }
   }
 ```
+## Ternary over `if ... else`
+Using ternary operator instead of the if else statement saves gas.
+
+For instance, the code block below may be refactored as follows:
+
+[File: AstariaRouter.sol#L724-L728](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L724-L728)
+
+```solidity
+ epochLength > uint256(0)
+     ? vaultType = uint8(ImplementationType.PublicVault)
+     : vaultType = uint8(ImplementationType.PrivateVault);
+``` 
+## Payable access control functions costs less gas
+Consider marking functions with access control as `payable`. This will save 20 gas on each call by their respective permissible callers for not needing to have the compiler check for `msg.value`.
+
+For instance, the function below may be refactored as follows:
+
+[File: PublicVault.sol#L562](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol#L562)
+
+```diff
+-  function afterPayment(uint256 computedSlope) public onlyLienToken {
++  function afterPayment(uint256 computedSlope) public payable onlyLienToken {
+```
