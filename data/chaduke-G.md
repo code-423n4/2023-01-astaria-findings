@@ -163,5 +163,19 @@ if (owed > amount)
 G25. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L836
 This line is a duplicate function of L814. Only one of these two lines need to be used, no need for both. 
 
- 
+G26.  https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L184-L189
+``_deployWithdrawProxyIfNotDeployed()`` should have returned the deployed WithdrawProxy to save the gas from reading from the state variable.
+```
+    WithdrawProxy wp = _deployWithdrawProxyIfNotDeployed(s, epoch);
+
+    emit Withdraw(msg.sender, receiver, owner, assets, shares);
+
+    // WithdrawProxy shares are minted 1:1 with PublicVault shares
+    wp.mint(shares, receiver);                // @now we can save gas here
+```
+
+G27. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L669
+All public/external functions that can be called by privileged users can add ``payable`` to the function to save gas. 
+
+
  
