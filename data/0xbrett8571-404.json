@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbrett8571",
+  "risk": "3",
+  "title": "Arithmetic overflow vulnerability in `_totalAssets` function due to addition of `s.slope` and `s.yIntercept`",
+  "issueId": 404,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/404"
+}
