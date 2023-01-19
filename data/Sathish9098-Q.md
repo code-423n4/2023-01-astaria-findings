@@ -1,6 +1,6 @@
 # LOW FINDINGS
 
-## [L-1]  ids parameter not used any where inside the functions. Its better to be removed from functions parameter. 
+### [L-1]  ids parameter not used any where inside the functions. Its better to be removed from functions parameter. 
 
 ### Impact:
 
@@ -30,7 +30,7 @@ If there is no idea for using  ids parameter it can be safely removed .
 
 ##
 
-## [ L-2]  INITIALIZE() FUNCTION CAN BE CALLED BY ANYBODY
+### [ L-2]  INITIALIZE() FUNCTION CAN BE CALLED BY ANYBODY
 
 initialize() function can be called anybody when the contract is not initialized.
 
@@ -71,7 +71,7 @@ if (msg.sender != DEPLOYER_ADDRESS) {
 
 # NON CRITICAL FINDINGS
 
-## [NC - 1 ]  NATSPEC COMMENTS SHOULD BE ADDED IN CONTRACTS
+### [NC - 1 ]  NATSPEC COMMENTS SHOULD BE ADDED IN CONTRACTS
 
 It is recommended that Solidity contracts are fully annotated using NatSpec for all public interfaces (everything in the ABI). It is clearly stated in the Solidity official documentation.
 In complex projects such as Defi, the interpretation of all functions and their arguments and returns is important for code readability and auditability.
@@ -88,7 +88,7 @@ PROOF OF WORK:
 
 ##
 
-## [NC-2]  accounts parameter array length should be checked. Its possible to call balanceOfBatch() function with empty array.
+### [NC-2]  accounts parameter array length should be checked. Its possible to call balanceOfBatch() function with empty array.
 
 
 [FILE: 2023-01-astaria/src/ClearingHouse.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol)
@@ -112,7 +112,7 @@ PROOF OF WORK:
 
 ##
 
-## [NC-3] Shorter inheritance list
+###  [NC-3] Shorter inheritance list
 
 [FILE: 2023-01-astaria/src/CollateralToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol)
 
@@ -134,16 +134,23 @@ PROOF OF WORK:
 
  90 :  //invalid action private vautls can only be the owner or strategist
 
+[FILE : PublicVault.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol)
+
+///Audit  calcualtion=> calculation
+
+   307 : // reset liquidationWithdrawRatio to prepare for re calcualtion
+
+##
+
+### [NC-5]   EXPRESSIONS FOR CONSTANT VALUES SUCH AS A CALL TO KECCAK256(), SHOULD USE IMMUTABLE RATHER THAN CONSTANT
+
+
+While it doesn’t save any gas because the compiler knows that developers often make this mistake, it’s still best to use the right tool for the task at hand. There is a difference between constant variables and immutable variables, and they should each be used in their appropriate contexts. constants should be used for literal values written into the code, and immutable variables should be used for expressions, or values calculated in, or passed into the constructor.
+
+[FILE : PublicVault.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/PublicVault.sol)
+
+       53 :  uint256 private constant PUBLIC_VAULT_SLOT =
+    uint256(keccak256("xyz.astaria.PublicVault.storage.location")) - 1;
 
 
 
-
-NC-1	require() / revert() statements should have descriptive reason strings	32
-NC-2	Return values of approve() not checked	1
-NC-3	Event is missing indexed fields	30
-NC-4	Constants should be defined rather than using magic numbers	19
-NC-5	Functions not used internally could be marked external	83
-
-L-1	Do not use deprecated library functions	6
-L-2	Unsafe ERC20 operation(s)	2
-L-3	Unspecific compiler version pragma	4
