@@ -17,10 +17,16 @@ uint256 i;
 
 ## [G-02] Remove unused variable.
 
-The local variable in function `LientToken.sol:_paymentAH`  can be removed as it is not used.
+1. The local variable in function `LientToken.sol:_paymentAH`  can be removed as it is not used.
 
 ```diff
 uint256 end = stack[position].end;
+```
+
+1. The local variable in function `CollateralToken.sol:releaseToAddress`  can be removed as it is not used
+
+```solidity
+    address tokenContract = underlying.tokenContract;
 ```
 
 ## [G-03] Unnecessary use of mulDivDown.
