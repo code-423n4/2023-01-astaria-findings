@@ -32,11 +32,8 @@ The following function can simply just be a variable inside of another function
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/WithdrawProxy.sol#L77
 
 
-#Initialize is susceptible to front running 
+#AcceptGuardian 
 
-the following function is susceptible to a front run attack, allowing the attacker to become the guardian. 
-https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/AstariaRouter.sol#L83-L121
-
-## the attacker can then call the renounce guardian function which sets the guardian to address (0), preventing anyone from becoming the guardian 
-https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/AstariaRouter.sol#L345-L350
+The following function deletes the guardian and does not accept a new one
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/AstariaRouter.sol#L352-L357
 
