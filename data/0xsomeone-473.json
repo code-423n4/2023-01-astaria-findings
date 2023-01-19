@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xsomeone",
+  "risk": "3",
+  "title": "Inexistent Sanitization of Clearing House Payment Token",
+  "issueId": 473,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/473"
+}
