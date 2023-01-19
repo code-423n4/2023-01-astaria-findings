@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "rbserver",
+  "risk": "2",
+  "title": "For a public vault, first liquidity provider, who has 10 ether asset tokens, can block other users from becoming liquidity providers",
+  "issueId": 492,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/492"
+}
