@@ -133,3 +133,8 @@ uint256 collateralId = params.encumber.lien.collateralId;
 G20. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L309
 Introducing ``owed`` outside of the for loop can save gas to avoid allocating a new variable for each iteration.
 
+G21. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L389
+Caching ``params.lien.collateralId`` can save gas.
+```
+uint256 collateralId = params.lien.collateralId;
+```
