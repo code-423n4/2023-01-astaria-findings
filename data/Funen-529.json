@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Funen",
+  "risk": "3",
+  "title": "Incorrectly assumed payer in `_payment()` fn can allows attackers to make payments on behalf of other addresses and resulting financial loss for other users",
+  "issueId": 529,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/529"
+}
