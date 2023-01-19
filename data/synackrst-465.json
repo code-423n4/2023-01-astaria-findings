@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "synackrst",
+  "risk": "3",
+  "title": "processEpoch and claim can be reentered to double burn",
+  "issueId": 465,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/465"
+}
