@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0Kage",
+  "risk": "2",
+  "title": "`Deposit()` function for PublicVault wrongly compares `shares` with `minDepositAmount` preventing legitimate users from depositing assets into vault",
+  "issueId": 458,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/458"
+}
