@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "wallstreetvilkas",
+  "risk": "3",
+  "title": " Reentrancy in safeTransferFrom() in ClearingHouse.sol allows the attacker to withdraw the collateral, while still owning the borrowed assets.",
+  "issueId": 566,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/566"
+}
