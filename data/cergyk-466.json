@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "cergyk",
+  "risk": "3",
+  "title": "A public vault owner can lock and steal arbitrary collateralId by issuing a poisonous lien",
+  "issueId": 466,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/466"
+}
