@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "rbserver",
+  "risk": "3",
+  "title": "Strategist can fail to withdraw asset token from a private vault",
+  "issueId": 489,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/489"
+}
