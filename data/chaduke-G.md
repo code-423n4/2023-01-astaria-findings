@@ -154,4 +154,14 @@ if (remaining != 0 && _isPublicVault(s, payee)) {  // @audit: use short-circuit 
 }
 ```
 
+G24: https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L829
+Changing this line slightly:
+```
+if (owed > amount)
+```
 
+G25. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L836
+This line is a duplicate function of L814. Only one of these two lines need to be used, no need for both. 
+
+ 
+ 
