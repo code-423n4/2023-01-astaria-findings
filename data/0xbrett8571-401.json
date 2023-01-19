@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "Missing Success Check for `ClearingHouse transferUnderlying()` Call in `flash()` and `_releaseToAddress()` functions.",
+  "issueId": 401,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/401"
+}
