@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "jasonxiale",
+  "risk": "2",
+  "title": "AstariaRouter.getProtocolFee will revert if protocol fee is enabled",
+  "issueId": 434,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/434"
+}
