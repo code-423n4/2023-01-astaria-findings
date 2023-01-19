@@ -211,5 +211,19 @@ We need adjust ``end`` according to each ``stack[i].point.end`` since we will no
     }
   }
 ```
+QA29. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L761-L767
+We need to adjust ``timestamp`` here since we will not charge a lien interest beyond stack.point.end.
 
+```
+function _getOwed(Stack memory stack, uint256 timestamp)
+    internal
+    pure
+    returns (uint88)
+  {
+    if(timestamp > stack.point.end) timestamp = stack.point.end; // @audit: make adjustment to timestamp
+
+    return stack.point.amount + _getInterest(stack, timestamp).safeCastTo88();
+  }
+
+```
 
