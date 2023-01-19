@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "rbserver",
+  "risk": "2",
+  "title": "For a public vault, minimum deposit requirement that is enforced by `ERC4626Cloned.deposit` function can be bypassed by `ERC4626Cloned.mint` function or vice versa when share price does not equal one",
+  "issueId": 486,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/486"
+}
