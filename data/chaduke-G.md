@@ -138,3 +138,18 @@ Caching ``params.lien.collateralId`` can save gas.
 ```
 uint256 collateralId = params.lien.collateralId;
 ```
+
+G22. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L464
+Caching ``stack.length`` can save gas.
+```
+uint oldStackLength = stack.length;
+```
+G23:  https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L649-L653
+This is only necessary when ``remaining != 0``, so we can add this condition to short-circuit to save gas:
+```
+if (remaining != 0 && _isPublicVault(s, payee)) {  // @audit: use short-circuit here by adding condition 1
+      IPublicVault(payee).updateAfterLiquidationPayment(
+        IPublicVault.LiquidationPaymentParams({remaining: remaining})
+      );
+}
+```
