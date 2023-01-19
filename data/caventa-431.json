@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "caventa",
+  "risk": "3",
+  "title": "Validate stake could be too strict for some loan activities",
+  "issueId": 431,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/431"
+}
