@@ -1,3 +1,31 @@
+## INCONSISTENT COMMENTS WITH THE DOCS
+
+### Description:
+
+The docs mention that in the private vault only the owner can deposit  . But in the github contest page for  the vault description 
+ it says "PrivateVault contract, where only permissioned lenders can deposit funds." But now there are no permissioned lenders , just
+the owner .  Before the router was apart of the deposit flow into the private vaults as well
+ as letting the strategists delegate deposit but the team removed both of those. Now only the owner can deposit.
+
+Also if it more than owner could have deposited , then it could have resulted in a rugpull as the owner can withdraw all the 
+funds directly here https://github.com/code-423n4/2023-01-astaria/blob/main/src/Vault.sol#L70
+
+## pullToken SHOULD BE MADE INTERNAL
+
+### Description:
+
+The pullTokens https://github.com/AstariaXYZ/astaria-gpl/blob/4b49fe993d9b807fe68b3421ee7f2fe91267c9ef/src/ERC4626Router.sol#L17  
+should be an internal function as it is only meant to be called from depositToVault , depositMax , redeemMax. Calling the
+pullTokens might induce problems if it pulls token from the vault. 
+
+
+## ALLOWANCE SHOULD BE SET TO 0 FIRST
+
+### Description:
+
+Read here https://docs.google.com/document/d/1YLPtQxZu1UAvO9cZ1O2RPXBbT0mooh4DYKjA_jp-RLM/edit#heading=h.44kttz4zxoa
+to see why allowance should be set to 0 first as it may lead to use old allowance value instead of new value.
+
 
 ## UNNECESSARY CHECK IN  LienToken CONTRACT
 
