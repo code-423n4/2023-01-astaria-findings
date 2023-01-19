@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Jeiwan",
+  "risk": "3",
+  "title": "Vault may be drained after a liquidated NFT was claimed by the liquidator",
+  "issueId": 480,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/480"
+}
