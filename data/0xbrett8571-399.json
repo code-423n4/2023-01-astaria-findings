@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "Bypassing security check in flash function due to lack of return value validation for onFlashAction.",
+  "issueId": 399,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/399"
+}
