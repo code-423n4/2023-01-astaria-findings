@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "adriro",
+  "risk": "2",
+  "title": "Wrong implementations in `ERC4626RouterBase` contract",
+  "issueId": 596,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/596"
+}
