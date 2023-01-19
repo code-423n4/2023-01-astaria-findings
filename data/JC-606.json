@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "JC",
+  "risk": "2",
+  "title": "First ERC4626 deposit can break share calculation",
+  "issueId": 606,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/606"
+}
