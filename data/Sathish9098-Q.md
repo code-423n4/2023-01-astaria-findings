@@ -43,6 +43,8 @@ PROOF OF WORK:
 
 [FILE: 2023-01-astaria/src/ClearingHouse.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/ClearingHouse.sol)
 
+[FILE: 2023-01-astaria/src/CollateralToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol)
+
 ##
 
 ## [NC-2]  accounts parameter array length should be checked. Its possible to call balanceOfBatch() function with empty array.
@@ -67,6 +69,29 @@ PROOF OF WORK:
 
    require(accounts.length>0, " Array is empty");
 
+##
+
+## [NC-3] Shorter inheritance list
+
+[FILE: 2023-01-astaria/src/CollateralToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol)
+
+
+     contract CollateralToken is
+     AuthInitializable,
+     ERC721,
+     IERC721Receiver,
+     ICollateralToken,
+     ZoneInterface
+
+##
+
+### [NC-4] TYPOS
+
+[FILE : Vault.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/Vault.sol)
+
+///Audit  vautls  => vaults 
+
+ 90 :  //invalid action private vautls can only be the owner or strategist
 
 
 
