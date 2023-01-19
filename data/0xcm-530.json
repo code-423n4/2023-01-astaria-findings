@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xcm",
+  "risk": "2",
+  "title": "Incorrect implementation resulted in inability to make small deposits when share prices are high",
+  "issueId": 530,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/530"
+}
