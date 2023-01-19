@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "gz627",
+  "risk": "3",
+  "title": "The conversion between `withdrawRatio` and the amount of asset is inconsistent",
+  "issueId": 500,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/500"
+}
