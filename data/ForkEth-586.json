@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "ForkEth",
+  "risk": "2",
+  "title": "PublicVault Contract Allows Minting Tokens to a Null Address",
+  "issueId": 586,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/586"
+}
