@@ -67,8 +67,30 @@ Block.timestamp - L115
 
 Manual Analysis
 
-## Recommended Mitigation Steps
+### Recommended Mitigation Steps
 
 1. Don't use block.timestamp for a source of entropy and random number
 2. Use of trusted oracles
+
+
+# Number 3: More Readable Values 
+
+Vulnerability details
+
+## Impact
+
+A uint value is difficult to read at one time because it has a lot of 0's.
+Solidity allows _ to separate series of zero's
+
+## Proof of Concept
+
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L604 
+
+## Tools Used
+
+Manual Analysis
+
+## Recommended Mitigation Steps
+
+Replace 10000 with 10_000
 
