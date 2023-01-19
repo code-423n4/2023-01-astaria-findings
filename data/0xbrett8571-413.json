@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbrett8571",
+  "risk": "3",
+  "title": "Arbitrary Code Execution Vulnerability in the BeaconProxy Contract due to the use of the delegatecall opcode",
+  "issueId": 413,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/413"
+}
