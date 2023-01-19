@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "peanuts",
+  "risk": "2",
+  "title": "Solmate safetransfer and safetransferfrom does not check the codesize of the token address, which may lead to fund loss",
+  "issueId": 577,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/577"
+}
