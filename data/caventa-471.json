@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "caventa",
+  "risk": "2",
+  "title": "Refinancing does not change stack.point.end correctly",
+  "issueId": 471,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/471"
+}
