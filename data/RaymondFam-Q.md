@@ -1,3 +1,15 @@
+## Comments and code mismatch
+As denoted by the [comments on `commitToLiens()`](https://github.com/code-423n4/2023-01-astaria/blob/main/src/interfaces/IAstariaRouter.sol#L174-L181) in IAstariaRouter.sol:
+
+```
+  /**
+   * @notice Deposits collateral and requests loans for multiple NFTs at once.
+   * @param commitments The commitment proofs and requested loan data for each loan.
+   * @return lienIds the lienIds for each loan.
+   */
+```
+However, the [logic entailed](https://github.com/code-423n4/2023-01-astaria/blob/main/src/AstariaRouter.sol#L490-L516) in AstariaRouter.sol only deals with one NFT and multiple, NOT multiple NFTs. Consider updating the NatSpec associated to better reflect the intended design of this particular function.
+
 ## Solmate's contract existence check
 As denoted by [File: SafeTransferLib.sol#L9](https://github.com/transmissions11/solmate/blob/main/src/utils/SafeTransferLib.sol#L9):
 
