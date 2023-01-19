@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Breeje",
+  "risk": "3",
+  "title": "First PublicVault depositor can be front-run and have part of their deposit stolen",
+  "issueId": 509,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/509"
+}
