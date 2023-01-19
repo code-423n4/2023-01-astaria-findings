@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "Overflow in _afterCommitToLien Function When Incrementing Slope for New Lien",
+  "issueId": 406,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/406"
+}
