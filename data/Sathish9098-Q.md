@@ -28,6 +28,47 @@ Without any usage its cause a confusion while calling the functions.
 
 If there is no idea for using  ids parameter it can be safely removed . 
 
+##
+
+## [ L-2]  INITIALIZE() FUNCTION CAN BE CALLED BY ANYBODY
+
+initialize() function can be called anybody when the contract is not initialized.
+
+[FILE : CollateralToken.sol](https://github.com/code-423n4/2023-01-astaria/blob/main/src/CollateralToken.sol)
+
+    function initialize(
+    Authority AUTHORITY_,
+    ITransferProxy TRANSFER_PROXY_,
+    ILienToken LIEN_TOKEN_,
+    ConsiderationInterface SEAPORT_
+    ) public initializer {
+    __initAuth(msg.sender, address(AUTHORITY_));
+    __initERC721("Astaria Collateral Token", "ACT");
+    CollateralStorage storage s = _loadCollateralSlot();
+    s.TRANSFER_PROXY = TRANSFER_PROXY_;
+    s.LIEN_TOKEN = LIEN_TOKEN_;
+    s.SEAPORT = SEAPORT_;
+    (, , address conduitController) = s.SEAPORT.information();
+    bytes32 CONDUIT_KEY = Bytes32AddressLib.fillLast12Bytes(address(this));
+    s.CONDUIT_KEY = CONDUIT_KEY;
+    s.CONDUIT_CONTROLLER = ConduitControllerInterface(conduitController);
+
+    s.CONDUIT = s.CONDUIT_CONTROLLER.createConduit(CONDUIT_KEY, address(this));
+    s.CONDUIT_CONTROLLER.updateChannel(
+      address(s.CONDUIT),
+      address(SEAPORT_),
+      true
+    );
+    }
+
+Recommended Mitigation Steps :
+
+Add a control that makes initialize() only call the Deployer Contract;
+
+if (msg.sender != DEPLOYER_ADDRESS) {
+						revert NotDeployer();
+				}
+
 # NON CRITICAL FINDINGS
 
 ## [NC - 1 ]  NATSPEC COMMENTS SHOULD BE ADDED IN CONTRACTS
