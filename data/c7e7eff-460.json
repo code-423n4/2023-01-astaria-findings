@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "c7e7eff",
+  "risk": "3",
+  "title": "Lack of input validation on ClearingHouse SafeTransferFrom() and erroneous active auction check can lead to forced CollateralToken burn and loss of funds.",
+  "issueId": 460,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/460"
+}
