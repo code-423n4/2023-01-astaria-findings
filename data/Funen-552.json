@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Funen",
+  "risk": "3",
+  "title": "Overflow/Underflow in interest calculation caused by lack of timestamp validation in `_getInterest()` & `_getRemainingInterest()` function",
+  "issueId": 552,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/552"
+}
