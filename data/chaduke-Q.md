@@ -166,6 +166,50 @@ https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc98
 QA23. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L337-L342
 Maybe we should use the maximum ``liquidationInitialAsk`` here in all the stacks, otherwise, if we chose the ``liquidationInitialAsk`` from stack[0] by default, some ``liquidationInitialAsk`` agreements for other stacks might have already been violated. 
  
+QA24. G24. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L715-L725
+We need to check that we will not exceed ``stack.length`` here, otherwise, it is an out-of-array-bound error:
+```
+uint stacklen = stack.length;
+if(n > stacklen ) n = stacklen;
+```
 
+QA25. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L255-L263
+The interests can only be calculated up to stack.point.end, so we need some adjustment here:
+```
+function _getInterest(Stack memory stack, uint256 timestamp)
+    internal
+    pure
+    returns (uint256)
+  {
+    if(timestamp > stack.point.end) timestamp = stack.point.end;
+
+    uint256 delta_t = timestamp - stack.point.last;
+
+    return (delta_t * stack.lien.details.rate).mulWadDown(stack.point.amount);
+  }
+```
+
+QA26. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L727-L740
+We need adjust ``end`` according to each ``stack[i].point.end`` since we will not charge interest beyond ``stack[i].point.end``.
+```
+ function getMaxPotentialDebtForCollateral(Stack[] memory stack, uint256 end)
+    public
+    view
+    validateStack(stack[0].lien.collateralId, stack)
+    returns (uint256 maxPotentialDebt)
+  {
+    uint256 i; 
+    uint256 realEnd; 
+    for (; i < stack.length; ) {
+      if(end > stack[i].point.end) realEnd = stack[i].point.end;
+      else realEnd = end;
+ 
+      maxPotentialDebt += _getOwed(stack[i], realEnd); // @audit: need to calculate what the real end should be
+      unchecked {
+        ++i;
+      }
+    }
+  }
+```
 
 
