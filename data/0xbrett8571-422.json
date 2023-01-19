@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "Missing _loadVISlot() function in contract causing error when invoked",
+  "issueId": 422,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/422"
+}
