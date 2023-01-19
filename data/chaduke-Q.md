@@ -163,3 +163,9 @@ https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc98
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/ClearingHouse.sol#L198
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/ClearingHouse.sol#L221
 
+QA23. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L337-L342
+Maybe we should use the maximum ``liquidationInitialAsk`` here in all the stacks, otherwise, if we chose the ``liquidationInitialAsk`` from stack[0] by default, some ``liquidationInitialAsk`` agreements for other stacks might have already been violated. 
+ 
+
+
+
