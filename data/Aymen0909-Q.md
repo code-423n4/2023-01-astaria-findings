@@ -17,7 +17,7 @@
 
 Both `mint` and `deposit` functions allow any user to mint new shares or deposit assets if they know and address in the allow list (which can be obtained from on-chain data) which should not be allowed as only the addresses in the `allowList` should be able to call the `mint` and `deposit` functions.
 
-The impact of this is that a malicious user can keep calling the `deposit` function for example and by sending some assets, the `deposit` function will call the `afterDeposit` hook which updates the `s.yIntercept` value, and so the `yIntercept` will keep changing values which can impact the protocol, not to forget that there is a deposit cap that can be reached.
+Even though the deposited assets or the minted shares goes to the receiver (who is in the allowed list), the impact of this is that a malicious user can keep calling the `deposit` function for example by sending some assets, the `deposit` function will call the `afterDeposit` hook which updates the `s.yIntercept` value, and so the `yIntercept` will keep changing in value which can impact the protocol, not to forget that there is a deposit cap that can be reached.
 
 I submitted this as Low because the malicious user must lose money to perform this "attack", but it's still valid because in the protocol logic it's said that only addresses from the `allowList` should be able to call the `mint` and `deposit` functions.
 
