@@ -122,3 +122,10 @@ Caching ``params.encumber.stack[params.position]`` can save gas for function ``_
 Stack calldata currentStack = params.encumber.stack[params.position];
 
 ```
+
+G19. https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/LienToken.sol#L107
+Caching ``params.encumber.lien.collateralId`` can save gas. 
+```
+uint256 collateralId = params.encumber.lien.collateralId; 
+
+```
