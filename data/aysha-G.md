@@ -51,3 +51,11 @@ https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc98
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/interfaces/IVaultImplementation.sol#L46-L47
 https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/interfaces/IVaultImplementation.sol#L49
 ==========================================================
+
+Prefix increments are cheaper than postfix increments - 6 gas. This can mean interesting savings in for loops. Change variable++ to ++variable. https://github.com/code-423n4/2022-07-swivel/blob/daf72892d8a8d6eaa43b9e7d1924ccb0e612ee3c/Swivel/Swivel.sol#L100
+
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L341
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L558
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/PublicVault.sol#L539
+https://github.com/code-423n4/2023-01-astaria/blob/1bfc58b42109b839528ab1c21dc9803d663df898/src/VaultImplementation.sol#L69
+=========================================================
