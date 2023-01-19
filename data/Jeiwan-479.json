@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "Jeiwan",
+  "risk": "3",
+  "title": "Collateral may be liquidated at an outdated price, causing lose of funds for LPs",
+  "issueId": 479,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/479"
+}
