@@ -1,0 +1,8 @@
+{
+  "contest": 202,
+  "handle": "bin2chen",
+  "risk": "2",
+  "title": "_buyoutLien() does not properly validate the liquidationInitialAsk",
+  "issueId": 587,
+  "issueUrl": "https://github.com/code-423n4/2023-01-astaria-findings/issues/587"
+}
